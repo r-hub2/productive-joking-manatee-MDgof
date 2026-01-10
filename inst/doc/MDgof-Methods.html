@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MDgof-Methods</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">MDgof-Methods</h1>
+
+
+
+<p>In the following discussion <span class="math inline">\(F(\mathbf{x})\)</span> will denote the cumulative
+distribution function and <span class="math inline">\(\hat{F}(\mathbf{x})\)</span> the empirical
+distribution function of a random vector <span class="math inline">\(\mathbf{X}\)</span>.</p>
+<p>Except for the chi-square tests none of the tests included in the
+package has a large sample theory that would allow for finding p values,
+and so for all of them simulation is used.</p>
+<div id="continuous-data" class="section level2">
+<h2>Continuous data</h2>
+<div id="tests-based-on-a-comparison-of-the-theoretical-and-the-empirical-distribution-function." class="section level3">
+<h3>Tests based on a comparison of the theoretical and the empirical
+distribution function.</h3>
+<p>A number of classical tests are based on a test statistic of the form
+<span class="math inline">\(\psi(F,\hat{F})\)</span>, where <span class="math inline">\(\psi\)</span> is some functional measuring the
+“distance” between two functions. Unfortunately in d dimensions the
+number of evaluations of <span class="math inline">\(F\)</span> needed
+generally is of the order of <span class="math inline">\(n^d\)</span>,
+and therefore becomes computationally to expensive even for <span class="math inline">\(d=2\)</span> and for moderately sized data sets.
+This is especially true because none of these tests has a large-sample
+theory for the test statistic, and therefore p values need to be found
+via simulation. <em>Mdgof</em> includes four such test, which are more
+in the spirit of “inspired by ..” than actual implementations of the
+true tests. They are</p>
+<p><strong>Quick Kolmogorov-Smirnov test (qKS)</strong></p>
+<p>The Kolmogorov-Smirnov test is one of the best known and most widely
+used goodness-of-fit tests. It is based on</p>
+<p><span class="math display">\[\psi(F,\hat{F})=\max\left\{\vert
+F(\mathbf{x})-\hat{F}(\mathbf{x}\vert:\mathbf{x} \in
+\mathbf{R^d}\right\}\]</span> The test implemented in <em>MDgof</em>
+uses</p>
+<p><span class="math display">\[TS=\max\left\{\vert
+F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i\vert\right\}\]</span> The KS test
+was first proposed in <span class="citation">(Kolmogorov 1933)</span>
+and <span class="citation">(Smirnov 1939)</span>. We use the notation
+<em>qKS</em> (quick Kolmogorov-Smirnov) to distinguish the test
+implemented in <em>MDgof</em> from the full test.</p>
+<p><strong>Quick Kuiper’s test (qK)</strong></p>
+<p>This is a variation of the KS test proposed in <span class="citation">(Kuiper 1960)</span>:</p>
+<p><span class="math display">\[\psi(F,\hat{F})=\max\left\{
+F(\mathbf{x})-\hat{F}(\mathbf{x}):\mathbf{x} \in
+\mathbf{R^d}\right\}+\max\left\{\hat{F}(\mathbf{x})-F(\mathbf{x}):\mathbf{x}  \in
+\mathbf{R^d}\right\}\]</span> <span class="math display">\[TS=\max\left\{
+F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i)\right\}+\max\left\{\hat{F}(\mathbf{x}_i)-F(\mathbf{x}_i)\right\}\]</span>
+<strong>Quick Cramer-vonMises test (qCvM)</strong></p>
+<p>Another classic test using</p>
+<p><span class="math display">\[\psi(F,\hat{F})=\int
+\left(F(\mathbf{x})-\hat{F}(\mathbf{x})\right)^2
+d\mathbf{x}\]</span></p>
+<p><span class="math display">\[TS=\sum_{i=1}^n
+\left(F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i)\right)^2\]</span> This test
+was first discussed in is discussed in <span class="citation">(T. W.
+Anderson 1962)</span>.</p>
+<p><strong>Quick Anderson-Darling test (qAD)</strong></p>
+<p>The Anderson-Darling test is based on the test statistic</p>
+<p><span class="math display">\[\psi(F,\hat{F})=\int
+\frac{\left(F(\mathbf{x})-\hat{F}(\mathbf{x})\right)^2}{F(\mathbf{x})[1-F(\mathbf{x})]}
+d\mathbf{x}\]</span></p>
+<p><span class="math display">\[TS=\sum_{i=1}^n
+\frac{\left(F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i)\right)^2}{F(\mathbf{x}_i)[1-F(\mathbf{x}_i)]}\]</span>
+and was first proposed in <span class="citation">(Theodore W. Anderson,
+Darling, et al. 1952)</span>.</p>
+<p><strong>Bickel-Breiman Test (BB)</strong></p>
+<p>This test uses the density, not the cumulative distribution
+function.</p>
+<p>Let <span class="math inline">\(R_j=\min
+\left\{||\mathbf{x}_i-\mathbf{x}_j||:1\le i\ne j \le n\right\}\)</span>
+be some distance measure in <span class="math inline">\(\mathbf{R}^d\)</span>, not necessarily Euclidean
+distance. Let <span class="math inline">\(f\)</span> be the density
+function under the null hypothesis and define</p>
+<p><span class="math display">\[U_j=\exp\left[
+-n\int_{||\mathbf{x}-\mathbf{x}_i||&lt;R_j}f(\mathbf{x})d\mathbf{x}\right]\]</span>
+Then it can be shown that under the null hypothesis <span class="math inline">\(U_1,..,U_n\)</span> have a uniform distribution on
+<span class="math inline">\([0,1]\)</span>, and a goodness-of-fit test
+for univariate data such as Kolmogorov-Smirnov can be applied. This test
+was first discussed in <span class="citation">(Bickel and Breiman
+1983)</span>.</p>
+<p><strong>Bakshaev-Rudzkis test (BR)</strong></p>
+<p>This test proceeds by estimating the density via a kernel density
+estimator and then comparing it to the density specified in the null
+hypothesis. Details are discussed in <span class="citation">(Bakshaev
+and Rudzkis 2015)</span>.</p>
+<p><strong>Maximum Mean Discrepancy test (MMD)</strong></p>
+<p>The Maximum Mean Discrepancy (MMD) goodness-of-fit test is a
+nonparametric kernel-based test for assessing whether observed data come
+from a specified target distribution. It works by embedding both the
+empirical distribution of the data and the target distribution into a
+reproducing kernel Hilbert space (RKHS) and measuring the distance
+between their mean embeddings. If this distance (the MMD) is zero, the
+two distributions are identical for characteristic kernels; larger
+values indicate a discrepancy. The test statistic can be estimated from
+samples and its null distribution obtained via asymptotic theory or
+resampling, allowing one to reject the null hypothesis when the observed
+data are inconsistent with the target distribution. For detailed
+discussions see <span class="citation">(Gretton et al. 2012)</span> and
+<span class="citation">(Chwialkowski, Strathmann, and Gretton
+2016)</span>.</p>
+</div>
+<div id="tests-based-on-the-rosenblatt-transform." class="section level3">
+<h3>Tests based on the Rosenblatt transform.</h3>
+<p>The Rosenblatt transform is a generalization of the probability
+integral transform. It transforms a random vector <span class="math inline">\((X_1,..,X_d)\)</span> into <span class="math inline">\((U_1,..,U_d)\)</span>, where <span class="math inline">\(U_i\sim U[0,1]\)</span> and <span class="math inline">\(U_i\)</span> is independent of <span class="math inline">\(U_j\)</span>. It uses</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;U_1  = F_{X_1}(x_1)\\
+&amp;U_2  = F_{X_2|X_1}(x_2|x_1)\\
+&amp;... \\
+&amp;U_d  = F_{X_d|X_1,..,X_{d-1}}(x_d|x_1,..,x_{d-1})\\
+\end{aligned}
+\]</span> and so requires knowledge of the conditional distributions. In
+our case of a goodness-of-fit test, however, these will generally not be
+know. One can show, though, that</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;F_{X_1}(x_1)    = F(x_1, \infty)\\
+&amp;F_{X_2|X_1}(x_2|x_1)    = \frac{\frac{d}{dx_1}F(x_1,
+x_2,\infty,..,\infty)}{\frac{d}{dx_1}F(x_1, \infty,..\infty)}\\
+&amp;... \\
+&amp;F_{X_d|X_1,..,X_{d-1}}(x_d|x_1,..,x_{d-1})    =
+\frac{\frac{d^{d-1}}{dx_1x_2..x_{d-1}}F(x_1,..,
+x_d)}{\frac{d^{d-1}}{dx_1x_2..x_{d-1}}F(x_1, \infty,..,\infty)}\\
+\end{aligned}
+\]</span> Unfortunately for general cdf <span class="math inline">\(F\)</span>, these derivatives will have to be
+found numerically, and for <span class="math inline">\(d&gt;2\)</span>
+this would not be feasable because of issues with calculation times and
+numerical instabilities. For these reasons these methods are only
+implemented for bivariate data.</p>
+<p><em>MDgof</em> includes two tests based on the Rosenblatt
+transform:</p>
+<p><strong>Fasano-Franceschini test (FF)</strong></p>
+<p>This implements a version of the KS test after a Rosenblatt
+transform. It also it is discussed in <span class="citation">(Fasano and
+Franceschini 1987)</span>.</p>
+<p><strong>Ripley’s K test (Rk)</strong></p>
+<p>This test finds the number of observations with a radius r of a given
+observation for different values of R. After the Rosenblatt transform
+(if the null hypothesis is true) the data is supposed to be independent
+uniforms, and so the area of a circle of radius r is <span class="math inline">\(\pi r^2\)</span>. The two are the compared via the
+mean square. This test was proposed in <span class="citation">(Ripley
+1976)</span>. The test is implemented in <em>MDgof</em> using the R
+library <em>spatstat</em> <span class="citation">(Baddeley and Turner
+2005)</span>.</p>
+</div>
+</div>
+<div id="discrete-data" class="section level2">
+<h2>Discrete data</h2>
+<p>Methods for discrete (or histogram) data are implemented only for
+dimension 2 because for higher dimensions the sample sizes required
+would be to large. The methods are</p>
+<div id="methods-based-on-the-empirical-distribution-fuction." class="section level3">
+<h3>Methods based on the empirical distribution fuction.</h3>
+<p>These are discretized versions of the Kolmogorov-Smirnov test (KS),
+Kuiper’s test (K), Cramer-vonMises test (CvM) and Anderson-Darling
+test(AD). Note that unlike in the continuous case these tests are
+implemented using the full theoretical ideas and are not based on short
+cuts.</p>
+</div>
+<div id="methods-based-on-the-density" class="section level3">
+<h3>Methods based on the density</h3>
+<p>These are methods that directly compare the observed bin counts <span class="math inline">\(O_{i,j}\)</span> with the theoretical ones <span class="math inline">\(E_{i,j}=nP(X_1=x_i,X_2=y_j)\)</span> under the
+null hypothesis. They are</p>
+<p><strong>Pearson’s chi-square</strong></p>
+<p><span class="math display">\[TS=\sum_{ij}
+\frac{(O_{ij}-E_{ij})^2}{E_{ij}}\]</span> <strong>Total
+Variation</strong></p>
+<p><span class="math display">\[TS =\frac1{n^2}\sum_{ij}
+\left(O_{ij}-E_{ij}\right)^2\]</span></p>
+<p><strong>Kullback-Leibler</strong></p>
+<p><span class="math display">\[TS =\frac1{n}\sum_{ij}
+O_{ij}\log\left(O_{ij}/E_{ij}\right)\]</span>
+<strong>Hellinger</strong></p>
+<p><span class="math display">\[TS =\frac1{n}\sum_{ij}
+\left(\sqrt{O_{ij}}-\sqrt{E_{ij}}\right)^2\]</span></p>
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-Anderson1962" class="csl-entry">
+Anderson, T. W. 1962. <span>“On the Distribution of the Two_sample
+Cramer-von Mises Criterion.”</span> <em>The Annals of Mathematical
+Statistics</em> 33(3): 1148–59.
+</div>
+<div id="ref-anderson1952" class="csl-entry">
+Anderson, Theodore W, Donald A Darling, et al. 1952. <span>“Asymptotic
+Theory of Certain Goodness of Fit Criteria Based on Stochastic
+Processes.”</span> <em>The Annals of Mathematical Statistics</em> 23
+(2): 193–212.
+</div>
+<div id="ref-baddeley2005" class="csl-entry">
+Baddeley, Adrian, and Rolf Turner. 2005. <span>“<span class="nocase">spatstat</span>: An <span>R</span> Package for Analyzing
+Spatial Point Patterns.”</span> <em>Journal of Statistical Software</em>
+12 (6): 1–42. <a href="https://doi.org/10.18637/jss.v012.i06">https://doi.org/10.18637/jss.v012.i06</a>.
+</div>
+<div id="ref-bakshaev2015" class="csl-entry">
+Bakshaev, A., and R. Rudzkis. 2015. <span>“Multivariate Goodness-of-Fit
+Tests Based on Kernel Density Estimators.”</span> <em>Nonlinear
+Analysis: Modelling and Control</em> 20 (4): 585–602. <a href="https://doi.org/10.15388/na.2015.4.9">https://doi.org/10.15388/na.2015.4.9</a>.
+</div>
+<div id="ref-bickel1983" class="csl-entry">
+Bickel, P. J., and L. Breiman. 1983. <span>“Sums of Functions of Nearest
+Neighbor Distances, Moment Bounds, Limit Theorems and a Goodness of Fit
+Test.”</span> <em>The Annals of Probability</em> 11 (1): 185–214. <a href="https://doi.org/10.1214/aop/1176993668">https://doi.org/10.1214/aop/1176993668</a>.
+</div>
+<div id="ref-chwialkowski2016" class="csl-entry">
+Chwialkowski, Kacper, Heiko Strathmann, and Arthur Gretton. 2016.
+<span>“A Kernel Test of Goodness of Fit.”</span> <em>arXiv Preprint</em>
+arXiv:1602.02964. <a href="https://arxiv.org/abs/1602.02964">https://arxiv.org/abs/1602.02964</a>.
+</div>
+<div id="ref-Fasano1987" class="csl-entry">
+Fasano, G., and A. Franceschini. 1987. <span>“A Multidimensional Version
+of the <span>K</span>olmogorov–<span>S</span>mirnov Test.”</span>
+<em>Monthly Notices of the Royal Astronomical Society</em> 225 (1):
+155–70. <a href="https://doi.org/10.1093/mnras/225.1.155">https://doi.org/10.1093/mnras/225.1.155</a>.
+</div>
+<div id="ref-gretton2012B" class="csl-entry">
+Gretton, Arthur, Dino Sejdinovic, Heiko Strathmann, Sivaraman
+Balakrishnan, Massimiliano Pontil, Kenji Fukumizu, and Bharath K.
+Sriperumbudur. 2012. <span>“Optimal Kernel Choice for Large Scale Two
+Sample Tests.”</span> In <em>Advances in Neural Information Processing
+Systems (NIPS)</em>, 1205–13.
+</div>
+<div id="ref-Kolmogorov1933" class="csl-entry">
+Kolmogorov, A. N. 1933. <span>“Sulla Determinazione Empirica Di Una
+Legge Di Distribuzione.”</span> <em>Giornale Dell’Instituto Italiano
+Degli Attuari</em> 4: 83–91.
+</div>
+<div id="ref-Kuiper1960" class="csl-entry">
+Kuiper, N. H. 1960. <span>“Tests Concerning Random Points on a
+Circle.”</span> <em>Proceedings of the Koninklijke Nederlandse Akademie
+van Wetenschappen</em> 63: 38–47.
+</div>
+<div id="ref-ripley1976" class="csl-entry">
+Ripley, B. D. 1976. <span>“The Second-Order Analysis of Stationary Point
+Processes.”</span> <em>Journal of Applied Probability</em> 13 (2):
+255–66.
+</div>
+<div id="ref-Smirnov1939" class="csl-entry">
+Smirnov, N. V. 1939. <span>“Estimate of Deviation Between Empirical
+Distribution Functions in Two Independent Samples.”</span> <em>Bull.
+Moscow Univ.</em> 2: 3–16.
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

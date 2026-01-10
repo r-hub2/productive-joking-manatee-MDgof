@@ -1,0 +1,143 @@
+---
+title: "MDgof-Methods"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MDgof-Methods}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: [references.bib]  
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(error=TRUE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include=FALSE}
+library(MDgof)
+```
+
+In the following discussion $F(\mathbf{x})$ will denote the cumulative distribution function and $\hat{F}(\mathbf{x})$ the empirical distribution function of a random vector $\mathbf{X}$.
+
+Except for the chi-square tests none of the tests included in the package has a large sample theory that would allow for finding p values, and so for all of them simulation is used. 
+
+## Continuous data
+
+### Tests based on a comparison of the theoretical and the empirical distribution function.
+
+A number of classical tests are based on a test statistic of the form $\psi(F,\hat{F})$, where $\psi$ is some functional measuring the "distance" between two functions. Unfortunately in d dimensions the number of evaluations of $F$ needed generally is of the order of $n^d$, and therefore becomes computationally to expensive even for $d=2$ and for moderately sized data sets. This is especially true because none of these tests has a large-sample theory for the test statistic, and therefore p values need to be found via simulation. *Mdgof* includes four such test, which are more in the spirit of "inspired by .." than actual implementations of the true tests. They are 
+
+**Quick Kolmogorov-Smirnov test (qKS)**
+
+The Kolmogorov-Smirnov test is one of the best known and most widely used goodness-of-fit tests. It is based on
+
+$$\psi(F,\hat{F})=\max\left\{\vert F(\mathbf{x})-\hat{F}(\mathbf{x}\vert:\mathbf{x} \in \mathbf{R^d}\right\}$$
+The test implemented in *MDgof* uses
+
+$$TS=\max\left\{\vert F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i\vert\right\}$$
+The KS test was first proposed in [@Kolmogorov1933] and [@Smirnov1939]. We use the notation *qKS* (quick Kolmogorov-Smirnov) to distinguish the test implemented in *MDgof* from the full test. 
+
+**Quick Kuiper's test (qK)**
+
+This is a variation of the KS test proposed in [@Kuiper1960]:
+
+$$\psi(F,\hat{F})=\max\left\{ F(\mathbf{x})-\hat{F}(\mathbf{x}):\mathbf{x} \in \mathbf{R^d}\right\}+\max\left\{\hat{F}(\mathbf{x})-F(\mathbf{x}):\mathbf{x}  \in \mathbf{R^d}\right\}$$
+$$TS=\max\left\{ F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i)\right\}+\max\left\{\hat{F}(\mathbf{x}_i)-F(\mathbf{x}_i)\right\}$$
+**Quick Cramer-vonMises test (qCvM)**
+
+Another classic test using
+
+$$\psi(F,\hat{F})=\int \left(F(\mathbf{x})-\hat{F}(\mathbf{x})\right)^2 d\mathbf{x}$$
+
+$$TS=\sum_{i=1}^n \left(F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i)\right)^2$$
+This test was first discussed in is discussed in [@Anderson1962].
+
+**Quick Anderson-Darling test (qAD)**
+
+The Anderson-Darling test is based on the test statistic
+
+$$\psi(F,\hat{F})=\int \frac{\left(F(\mathbf{x})-\hat{F}(\mathbf{x})\right)^2}{F(\mathbf{x})[1-F(\mathbf{x})]} d\mathbf{x}$$
+
+$$TS=\sum_{i=1}^n \frac{\left(F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i)\right)^2}{F(\mathbf{x}_i)[1-F(\mathbf{x}_i)]}$$
+and was first proposed in [@anderson1952].
+
+**Bickel-Breiman Test (BB)**
+
+This test uses the density, not the cumulative distribution function.
+
+Let $R_j=\min \left\{||\mathbf{x}_i-\mathbf{x}_j||:1\le i\ne j \le n\right\}$ be some distance measure in $\mathbf{R}^d$, not necessarily Euclidean distance. Let $f$ be the density function under the null hypothesis and define
+
+$$U_j=\exp\left[ -n\int_{||\mathbf{x}-\mathbf{x}_i||<R_j}f(\mathbf{x})d\mathbf{x}\right]$$
+Then it can be shown that under the null hypothesis $U_1,..,U_n$ have a uniform distribution on $[0,1]$, and a goodness-of-fit test for univariate data such as Kolmogorov-Smirnov can be applied. This test was first discussed in [@bickel1983].
+
+**Bakshaev-Rudzkis test (BR)**
+
+This test proceeds by estimating the density via a kernel density estimator and then comparing it to the density specified in the null hypothesis. Details are discussed in [@bakshaev2015].
+
+**Maximum Mean Discrepancy test (MMD)**
+
+The Maximum Mean Discrepancy (MMD) goodness-of-fit test is a nonparametric kernel-based test for assessing whether observed data come from a specified target distribution. It works by embedding both the empirical distribution of the data and the target distribution into a reproducing kernel Hilbert space (RKHS) and measuring the distance between their mean embeddings. If this distance (the MMD) is zero, the two distributions are identical for characteristic kernels; larger values indicate a discrepancy. The test statistic can be estimated from samples and its null distribution obtained via asymptotic theory or resampling, allowing one to reject the null hypothesis when the observed data are inconsistent with the target distribution. For detailed discussions see [@gretton2012B] and [@chwialkowski2016].
+
+### Tests based on the Rosenblatt transform.
+
+The Rosenblatt transform is a generalization of the probability integral transform. It transforms a random vector $(X_1,..,X_d)$ into $(U_1,..,U_d)$, where $U_i\sim U[0,1]$ and $U_i$ is independent of $U_j$. It uses
+
+$$
+\begin{aligned}
+&U_1  = F_{X_1}(x_1)\\
+&U_2  = F_{X_2|X_1}(x_2|x_1)\\
+&... \\
+&U_d  = F_{X_d|X_1,..,X_{d-1}}(x_d|x_1,..,x_{d-1})\\
+\end{aligned}
+$$
+and so requires knowledge of the conditional distributions. In our case of a goodness-of-fit test, however, these will generally not be know. One can show, though, that
+
+$$
+\begin{aligned}
+&F_{X_1}(x_1)    = F(x_1, \infty)\\
+&F_{X_2|X_1}(x_2|x_1)    = \frac{\frac{d}{dx_1}F(x_1, x_2,\infty,..,\infty)}{\frac{d}{dx_1}F(x_1, \infty,..\infty)}\\
+&... \\
+&F_{X_d|X_1,..,X_{d-1}}(x_d|x_1,..,x_{d-1})    = \frac{\frac{d^{d-1}}{dx_1x_2..x_{d-1}}F(x_1,.., x_d)}{\frac{d^{d-1}}{dx_1x_2..x_{d-1}}F(x_1, \infty,..,\infty)}\\
+\end{aligned}
+$$
+Unfortunately for general cdf $F$, these derivatives will have to be found numerically, and for $d>2$ this would not be feasable because of issues with calculation times and numerical instabilities. For these reasons these methods are only implemented for bivariate data.
+
+*MDgof* includes two tests based on the Rosenblatt transform:
+
+**Fasano-Franceschini test (FF)**
+
+This implements a version of the KS test after a Rosenblatt transform. It also it is discussed in [@Fasano1987].
+
+**Ripley's K test (Rk)**
+
+This test finds the number of observations with a radius r of a given observation for different values of R. After the Rosenblatt transform (if the null hypothesis is true) the data is supposed to be independent uniforms, and so the area of a circle of radius r is $\pi r^2$. The two are the compared via the mean square. This test was proposed in [@ripley1976]. The test is implemented in *MDgof* using the R library *spatstat* [@baddeley2005].
+
+## Discrete data
+
+Methods for discrete (or histogram) data are implemented only for dimension 2 because for higher dimensions the sample sizes required would be to large. The methods are
+
+### Methods based on the empirical distribution fuction.
+
+These are discretized versions of the Kolmogorov-Smirnov test (KS), Kuiper's test (K), Cramer-vonMises test (CvM) and Anderson-Darling test(AD). Note that unlike in the continuous case these tests are implemented using the full theoretical ideas and are not based on short cuts. 
+
+### Methods based on the density
+
+These are methods that directly compare the observed bin counts $O_{i,j}$ with the theoretical ones $E_{i,j}=nP(X_1=x_i,X_2=y_j)$ under the null hypothesis. They are
+
+**Pearson's chi-square**
+
+$$TS=\sum_{ij} \frac{(O_{ij}-E_{ij})^2}{E_{ij}}$$
+**Total Variation**
+
+$$TS =\frac1{n^2}\sum_{ij} \left(O_{ij}-E_{ij}\right)^2$$
+
+**Kullback-Leibler**
+
+$$TS =\frac1{n}\sum_{ij} O_{ij}\log\left(O_{ij}/E_{ij}\right)$$
+**Hellinger**
+
+$$TS =\frac1{n}\sum_{ij} \left(\sqrt{O_{ij}}-\sqrt{E_{ij}}\right)^2$$
+
+# References

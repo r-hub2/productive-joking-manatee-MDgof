@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Case Studies</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Case Studies</h1>
+
+
+
+<p>This vignette lists the case studies included in the package. They
+all create data sets with <span class="math inline">\(n=250\)</span>
+observations and power studies are done with a type I error probability
+<span class="math inline">\(\alpha=0.05\)</span>. The discrete data
+cases are the same as for continuous data, with the data binned in 5x5
+grids.</p>
+<p>To visualize a case study <em>MDgof</em> includes the routine
+<em>draw_case</em>. Let’s say we want to have a look at the first case
+study discussed below, called <em>uniform.diagonal.n</em>, for
+continuous data without parameter estimation in two dimensions:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>MDgof<span class="sc">::</span><span class="fu">draw_case</span>(<span class="st">&quot;uniform.diagonal.n&quot;</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>                  <span class="at">Continuous=</span><span class="cn">TRUE</span>,  </span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>                  <span class="at">WithEstimation=</span><span class="cn">FALSE</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>                  <span class="at">Dim=</span><span class="dv">2</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#&gt; Using 0.3 for alternative</span></span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAABL1BMVEUAAAAAADoAAGYAOpAAZrYZGWIZYp8aGhozMzM6ADo6AGY6kNs/GRk/GWI/P4E/gYE/gb1NTU1NTW5NTY5NU39NZKJNbqtNjshTTWRTU39Tf81iGRliGT9iGWJiP4FiYmJin9lkTU1kTVNkTWRkov9mAABmtv9uTU1uTW5uTY5ubqtuq+R/U01/zf+BPxmBPz+BP2KBn4GBvZ+BvdmOTU2OTW6OTY6OyP+QOgCQtpCQ2/+fYhmfn2Kf2Z+f2dmi//+rbk2rbm6rbo6ryKur5P+2ZgC2/7a2//+9gT+92dnIjk3I///Nf1PN///Zn2LZvYHZ2Z/Z2b3Z2dnbkDrb///kq27k///r6+v/omT/tmb/yI7/zX//25D/5Kv//6L//7b//8j//83//9v//+T///+n8GahAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAb+klEQVR4nO2dC58sN3HFhTGYhDjBhpAXIc7D5GECeZCYQGJIsIN9CcYPQPElfoD7+3+G7Oy0VOecqurumave9ULrZ9/tUUuqqr9KJbV6uqdMR1pM5b4V+KSnA9BKOgCtpAPQSjoAraQD0Eq6GtA7d5juU+YBaEXmAWhF5gFoReYBaEXmAWhF5gFoReYBaEXmAWhF5l0A+snvvHD699lX2udnX7EPlyh7QZVzeusr/3yFOJJ5N4A+88r9AHrzz77wIAA9+++f7Xqe/9wNoLe/+U9ffeNG4n/8yTOfuZTQ3QJ65bsv3Aegn/zuGyb4wnTHgN766hv3AOj1L7zz5mcfBqAbXe8e0NvfeOaZm7H1MAC9/c1/vHNANyPsnXe++8LDAHQ7lZ1m3dev6NIrAb1+Wl28+dkHAuhE5p3Xn3nm9/70rgC9/Q8nGW995cZ13/7GJ3oWe+J0nzIPQCsyD0ArMg9AKzIPQCsyrwZUT+n8b3XH6YnrCm2SOVj+AegA9GSFDkAHoCcrdAA6AD1ZoU2A3v/bH93+/ehbz3355/3PAailx8998RbQx99/efrZH7Q/DxxQKWWT/A2AHj3/g7MHffSvPzo50/zHKTuLRBEF1MATmL3B1FPxywA1ARPIQyhTAdVa7SbmUkB9iL3/dz+fPvqXV+c/Nxmfu0m90K1IqFR6ivLKatBrRbYVn0vMRdfFBm0uC9oC6PGXb8nMf+ZznXXrE+u0nlqHFJ+55DW3Zbphix40l3YCpkiXU2uBBznFntyDBgHqH2YOUB/aGQbo/Ke4GKSKscwtgLbEIDR2ERDxOX80AyJA5UJAGFJIrIkngb3UbIrI3ALo4++/dJ7FXkpnMRaOnwmQi+QAiGyNlfWAKjYB7UxkfiSP+6tIugDQ6f/1dVBsrPegHBCapz2bAAIZvXJtgKiZXmgSeZHfXwBoKZGyJisAhIKDtQArBmp7ZQEr24cCERDoUixQehp3A4i7Mu6cHjzZUvMWz4cBBcYJoDkGSbHWEpaGRvYCNIt2IShyhFJaDCKVVbPixsEKoN4WqFCnxDNxOlkAVAcBSsyqbXoJxIqvRKrpOFgCpBk2xDi0+WKoZBSXBgMis5YAwSdR3dxwCRDXUkfBE6xdNDbpQgmr7wVIbI8AeVuCWVdWeTKLhUAiYdyoY4QXaU6ngTHIzMpU7auaGJDjw5FtDVDVNjwh5ECTI5ynKuMA4aXNFNiLZoN1rKmW9JaiTD3X29WJqzR8pKRJ0C6VdfdIQAXCC/lIsaFejSI4SWCRhH5S1ghDqLElTtKeAALFAg32AtSXHsE8E1y0UwGDJdysqwUQN2dimGw3lQD5D3sCwka77MsAeWJwZgsgx6THX9SnV7DMOgWC20Ju8Cx2FSDSfCsgW+dlJhZ2J0Y6oehuQzCq9wDUlFMro32xYkFyPiE6QlPxxWo3USqZzBgQDOOJaHMDQwFpYC7BzNHEAqwYULXuTwGZnN40GUc7eQrI9Eb5+wCKB5W5uFN2AZCVlwupWhfWQeYhQEE6Bc8EgIK1xThAMGsrIJPd7XWAGEpLxNzd1WAwSJGblvYiQMRjH0Al9NA+5wugElgBhSo0tQGQDztAgnm7fvCE8OM0DFDU+iwD1JrEH7BnrcNY81VAYmblAQuooASC8yqbOmMA3Va+ZZEvSNspvPdU2h0oLEYNAuBIO8uFkqANHVmTrSIWdvoGMkd4UMaHuu/8F7oZy1VdhfPYQ5nJHbTqmlYPAgSJB9WhHuT44LWxQ9fcfpIiSpKgDQFUSYS/T0RjcBdATcAEgqoI7zsOfsNMCjpCKSAkb4CKdYaAjAFhQ8RqPKDFLQs2JjyrrVW7mnCAHNnKl182nbOntakOhVRsFVoYAMitYV1XqM2aswCoR40AkK8WAlKtEJydE5JDAfHucUV5sc0LONAaTCkgmeVzQG01y4WsiWCy2QeQOey1gGzAbAEkknHBDqf9hh00TYDsw6gYpICKeJCOQcUSDRaXn6+kJZTA5R9zigHZB++RgwGJlc6lsNdozyu8MCoShgUQtUyzFVzdYBFwJ9DlHLEBpOowDFBxPiI9gWsf2OEyQG6cmWOosg4QX+7GgLAplnQHgKTZQI4B6i4HgCL9gmkxBwQfwy90RNbfISDXasTHhnqlCIvkYgMiQOwdwV0V64h1QBy0WPEdAOFYS6bWfuxc63yoagaAYGBGC3MPaGkWDQq1ynsActHIK7gMyKteNAZRaPc3bi4DpNcjc94OgNDzVTxp1C0yI4NSGEOSa7EGSKr2VcyFgHz2EEBg7WZAshhcNGEDIGtpKjjvKSCnVwCIx9lgQNbppm2kn+Ysd3EOCGNQhVVNAEh18TNdy94NEHm1WshLJQ/IY8HQu7AfVLMopoWEg5vqeu5+gEqoB54g3RIwVmEToFLiO1uOotNLivdMamEIILmKAAAZIHVrqN3zMMqsbJjBQCGhwRArVAFLE7UmYQOg/rXonz13Si/f/v2i+6a9WOomBN9jkZ/F12Vl4Wkf5i0DF9dhrFbcP7Qm2giIHw87Pcny6GXnQbFVwofcV/qPJuyoKQeosJvGgBwL7aBE20sA0aMZp4dYPv7PV0NAK4yUUAhrOyCz5IkALRHaCIge7jm50s2QOw20CZ4Xm21YuDVmhvbyckvMzoatqFq+OJzh+3B4wt8giyQGGHJA+HjY7d/3/wa9CHsh7pDowuN8xJm3fzPE8Z1V9gLrd2rTBhMX5kKk6NUe9Lg/xNLjkLhpGPVchlv7JM4OFkUxyKIFNhIB8u3pX1/umhj06KWWmwEqtSiTiJmqGy6I3Dy1Dkibd21qIZnXkM/2Waw/HnYeWCc3+vi/aJpHBaLdRaelX/YH22zbAbGB8DkYsW0ws1xt6AJA8zro9nmx80i7WQc9/yopS1s9qGQKqPZkiqshvBWrgKZNgLwXxZqBNl2zcdsddC9KvyftAjIDIhWhShVAfqEIhtmhMeg2RjxAFZVuXXc3gHqvtI9ldg7MtXKyL2s2x0F6LmsjlmXq9V8OiLtwrrQTII5B0ViCnXVRiayAGBRci6E5dJmFY0xXsGtXRJI9EJBFisnjYPXPtqtGflZBuCuAuGLNAbnt7pjPHoAsWCiOKAj5a9nI1cH3gotVa9oBMvO8+y6psRugZkxkcEbEjmQfxAG6Pc63XIMFTf/sJgNxvoQNzoMjAPXWyLQrAdE9+1VAaLrJRjlUSgZcqJ0V2REQ+XItjg8GrWyzpE11RmsBkDlyaw3yuVQgS/POn8dN8wJeCHmFeNqb5z1PyD95sQKo5WPlrYCSy5Kdv0gep1rl1sOmWiUK0ix9BtTKEyCMkwGhOHcYoHijPpOJTOhDCR+oTABRcxsA8Y20SEfVZQ9A21yoyDcM8IQfjzGgQi2EgMixZS0Sr4zc7YfxgDYSkq9gKDnS2cbHRkDgOuQ1BMh8kKRxZ+0JSCfOEFCxIE0noAUcIA4Qj546zz3uhNlOZJ2e7MH7AOJezwHhROwBzWMCLE0uNchrApHobC1fekABmceOBUS9IoSEF7s7q5k8OxYACh5iRgngKhmggI+/FTsEkGqlgFrANDXdRqQBwsGCjpkCKtHcZ61L14RirVfaBtJQQCQn5MOg2JP5/IS5ncz8KQCUPORRA0CyaaTF+7DqWeMBnfVY4EMcdByygoizfWJAeNJikPmwAsIZ0b14CXpuMKBJ77rFuVGZgpNW1Bo9K+c1hJOSDe1Qi1l+4dYiaSNfLCCekYUayuiBkTPPf1oJlEm7ti60VnCEZDptwQZEiD7j96TNe13cdsEmARTANAYKyEHxgPzmB7YcsulFd5nm9dLTR/CuAOVSOI7QrQDiguRC2lYMZHdApmwmsd3IIiRdb2/NJYCgpC5ag7ZW0OwBqCwOkkS/YL6KAZWy9rrkEJCurhdUdJ3VWxoDCMQvd05aRrv7rGAxl1sCRK3r+tvIL+hn7XDlTzogKB4DKuAj4E1kY295mY/o2N3ovgHxVE4FacEQAsKq5E4GyPdC8Al1kmbGAPIxaNWVVUP8U9CD5s9XAorVYFmsS+XZYwgg1C9zIedmslxSpS8AFMtfAJQsDoEPKDEAEFjedOJFDv4bI/SZmwDRfKNOYx8SFP5TELQGAgJlSQUdCSGfABCdWVsowkIVu2wJkFNBa4+9msdmQ1PjT105lylFIkAAxYwkQBvIMKF+bTkSEEy2AAhnX7Qa3Ss0JfaxABBCYUC4gLoQULFeG3ypEQPqo4Dtn3o3FX4+I+j32rXdDqj6ZjYAks+jr8UKxSBZv0lP8SOZvQAHZtbcAYIWUFKwYRegiiYFzdjrYpUHHZlQzGlEEVKqL57nzH4SZaplTaxuNVXy6DnBxmHB2kav7gDImnWaS0AidWnemyBgdTdbBKTznU4SISCtTB5EXT0QULMCOgXkmWBWrMA+cCHX6qbuC0hcyIZCoWE98kucLJLHXuBWfOOQmbApLPMqQDT4gUsRJa2/A0Afvvip78BH+52R+Um64IdHQOBUmZYDJBO+XlESGRsAfhYLTCyF7ksUOWAn7hn89oMNgKbptVI+/dP5GB6oOz+gEf0AG/UmIFgEZLYTDDZpEyBaMOe4hWivHSm5DOjkRaV8/uxA/WGW+Rmo4MePxDBrn+Q5PBbWSxFn3wBIHSW/onBdIhdsAKiYM5WVGPSrb5fy1A/xcaj5SbrgB9hEoZ5lrZ0/+nKFyvVS/raa06/f4LIijkwil954OTdFbUbS5PO7pTx9M9RuBpo9UDc/SRf8AJvItw7QVaMWoxoVpnhZLBUfpHt20FzP8qN3BoCuAktOMiGf5k/O87XTwXs3LsS/t3YTh6IfYHN8TEasYRAXKlZA4/vI84B4fPcPsqwS4wvfacRotg3Qhy+ehlZLHHJuACU/wEayzT53GKYMEIatDFCl0gioEiCZ/ynuMNc1QJzsgbr5SbrsB9is04LVcsVYHI9J74tsQjCLyfl2TL3VmyrsI4I/UGjrStoeqJufpIvXQTRxAaBq8kw2qSKzyFZAAAQLx1dqvHm3Bgha2gBoOYEBAAj60ZwjAgQnXKDoy6oEEBu8EZAOKDit8IZumJmyuqpQJt7Np/CUYAqHWBDX/IaJhKVIQlNlZ0DYOHl/yfic9Q2/1b0RkE+4YULm46ekMgf8wYCqAxSpF/YumhdltpoRoGCJQ30TAkr7xO9NDgHEE8QyIDE6NC9SPrsWC2gkIzUGBDFwR0C8D0iAqseyZAlGEFq4JNdiFY6hXQ8iUyAHVMhrR+0HlcIxKFGMALmv/wPqJUCWUkBrfJrMnuEunAcBErnriETTXs/5IraaA7qAh7vfDR1xwXbHEwHqkFJdQ4suBWS1NvHR68J6b4DMpH5U+tSaTFEF10SgOK0PYplWZgmU7ixA270jwC+dzEExyE2vYL1SY/W9y3FvpjuKtMiKmkZAaHrHQi+7VQ8eBQh8UrR0lw8xnyCP9yQ2AQoaB8VMy2i7w7nWXoDU9Hxxr0YEgDqAhS1XXabLCtGa6+dCQOWOAKmZftUfHEYO5O/ye5mhD0AjUzyyVwHVXmggIF5Pl9L6XUNE6C56WAGQEctkcmgF7lPSb7QWoe1/yh8MiJRsmhdz2koeIep6VFsAzWcUEJ5IANEVkaFx39kfDyh+K9byWsVOS22r5WKQme0AtVgkzhEDYlp8h20fQLEyPqu0BQDWULzpQhHOhoB49CyMMdDGde8IQD45PHEKq2Q3srQCvqsyliu5cCy37CQvE7lHDFpJeTfHrUQeBNEirgFhCb9xpduevfZ4D0J5xbuyn3kxlAogyS8cz6MYFADCAQtN54ACvONjEDRKgkC2+/kMVDAEdMHVPIrBeRQ2xqh550E0i9bR66AAvgNUFRCax/1H0yzm5oBIZFlKVStbLpy/PRwGKFaktOmlyVVApq2ji1b0bA+I7dmWYkBdL7fdsg+g7rlt7N3KZkCm7ooVlimAllpYYeQBBTL3BXT+u0HXNUBo1kZAa8TCabfSibJDDKJ4GgHKSLiTNQK04EG+2fhTl8WzGBbV0D9yR5GcNVTU2VJ7bSAFCnITWQzyLIIs/LpRBKi2QvsBwtVDO0It3YTHngKACi77cVWjMp0H9IZ9XnTzJKi/yzSvTx17fY1DEVerNO6pTms1BmQtBDCsRTtLr6KwMmH1c6FhgLpWJVqHkMcWGhUVsnJAvVACKI3yq7GayrjSo2exPjk6JUqfWr0umSd0QOB/GSDvtdtmfgGkde4M0HwQ7YNAsVkpqLcMSL/+fTkfBuT6aFwMUkDqCpsA9UKmLR47QIBHFuzZ4PJ7KDzG9gNks9fcrKiRAIrWLwIIMAggMHAZkF4se0BRQLScEYBYXhwPNo4Dasvm4uK2XBNAvfJ8RBfLsqzSaayizJ61CyBeGyMgkL4aJ2wDXZVlQMUvsTygcP5seIEqX/+NBiQGVv4DNwwYYEYIFc8Bob0KKHMtWpuy10g7+1yLWSfh7qgsawCEZowC5LaUZi1lJKWA6jZA9rXo9//69meh4h9gS2LuAiDsKKrFgKyQdIrzjqotVPwA5WpBEk8IyB4POz2gcXqgJfgBNlWEXbngug/OmlLdHN5uEIpOplqugCJMhAIr+Bi0DZA9mvH4hOnRy8EPsKlafqxX2ll1F/DGgCrwsEmeWVXucaJ1Zz+QabX6eLQOiB/uuTnKfoCNqwVZePsL8/qZUL6vwm0VaHUBEMjgFqVUpn0OiB4POz3I4n+ArfMuPCfwWg8WSMltl9CD5krROuhcKQbipwz+G04XC99q2+ZBH32r/cCY/32x9ldsN10mKYTkZLFCgKxGACgZbZ5XMNXGdZn+RTHoZhbr4RkBSc/gIgzvbMpfIKdNYOXmjE8EyHrRnYkKXwbIHg+b+bgfYHOSAkDFQUBAxK4f4roguliVSpcACm4oXg3InheDH6KlH2DzgnCUBGIVkLeVdFwGtIEPrH2a2XjK/45CK7opBq2kpqxf+1F4IaXAsnVnWAa08kVHLIVrMmqeX6IiMXAYoCKinQeRMQGgJJqgthGgS1I33TTAIR6JHLwfRF1LgIKhjpx8bTEp2XKNG10lRAr0tYgW22HT/uzJ9JHd1wNi/UHFNUAT1Vp2qXDt49Ze+wHiNZh+ZHuZRnDVRFZs86DgGz5zbb6kkWMFFAXQwffFiIKEQuxIMD0DJHyWh1i83R3YzseAd2cPmsRNqgLiGE1XFGwSGwHz7eWAKi7M0XJl5QBZAB0HyMYLXnx4rVG2dyC5/sJTeQzKEnthAX8UVAEgmOIGAbKmcemzCsidKrQ0WgS0NtPrME13UrC33GMJgwCBXtkGaunxWgG1GuZ5Qzyoc1JAoiRcC1qrdwtInDcChJ95NVS3A8o91snEKctdUaP3jQdEQ0S/oLENEJfdDijhYzplnSCAKhQfAsjp1A8DQMVmsWK2A6F46r88BrVaqEIAiPSisDVsFiPqqiDI5ceUokUR3gYhQtFKOpCX2wyConx3sgWqwYCyWTsC5HTrA0cWlebvDGiVzVzbySnxwyCmPto0GJCanSxrPKDifBCiaJNAgNS6LYBwJLuzjs/YGKSiEZCanH8dPtC3bgKUTGFot4S6tGAdDshaE9dnQAs/hrkQTOpWQIstFD8XKJrqAI2JQZO/qdXkagaeIQXxjll0lh4L41aTSKRPgYWVY837kVS4Ek7gQeSgOG+DM6BdNB/F10U1nMVKPBndVsF/TbGe6LZ/CxPwxyoMA0Sye9TRfRBb9lkpmup4uWvWptP8IiBvr48D+iUiIToeECkafzeJlzu65dmLOSsUEFKMAfkLVA8oXE3eFSA0mb+WCifTTXM0NgcUSyy0DnOAzPlqAAgqjwBEjhyoyyekB+saIAgUIrOXb7WcSP76jYdlJ1olbGLshpnJTvi4hV8/md92gV4VQFE3eKGQn3tTuN2xJyANnepXVUlMkW3Y/dcCKgDetj3vH5AnIroLCZv3gpZQ2yVATogCojNtClRA1MBIQGiurU8qT/MZIDgFucuAHKEcEPPpgCJartAoQF4ncI7A+6GIGqpDrGW6WSzlY637tpsyE/aSRXJWYjSgqBOzHUXl6bq4ouLrgIjkMiAPDJe2dwmoz+DesXxxbqZ9gMJbAbXlJbS3Bkg+7wFoimXB2xZAeggIe1xhlSgGCaDQ7Aa5C47IcC5G76GzWELIGU+aJYsB71p1BVDwIM/5325voEdHoYBa8zsAcqMMtfWaYWREO7R0BCgQA9K0JZ5GZO0fPe3byw8ClKsbWcCr+4oWOD6t27cAsn7PA4vhxtFrPPYBFCl77hDTrudSBXGj4F4FaLsMaG4bbWd0xqetqs/ndCV9B4B6njut3atn6bKDYkQCSAYTr8VJ6uTzOyBed4DT7gWoHTiHWARUBZCGbpCpEi3RZRbIBECiLF7a7wSIb/kvJdHQ0ZoCoN3uTYBwJPEbD/rpEBAacNkQs+fF5qP098W28Skw0bgBqMb3vr0c0OkYVvI6KHsWAeKl/yZA9rzYfBT8vphKbq0nfPw2MAFyPtYGCMpkIwNAmBPpBVCeDJA9qzEf+d/26ZJV0w2A5LybpDNAXahKY8QQWVQvAdSmfKywCZA97TMf+d8XmzWbJr6rNU2wPup3mrCsroG70CBLE7QblsLqRaSQennjlJMqYs+LzUf+98VcV9vKBRYguECZepf1fu4VzM2g1cyDKi4OScw5BrnhVtCD+kJRa5deeR3QggehsiKi8MJ04bhbGVNMAU3QK5kYXTXixLCsWJe/DmhDDFpXcEyhaYvMwfLXAdnzYvNR9vti+yiIHz6ZgOD3xfJ10H4K4odPKKDltLeC+OEAdAB6skIHoF9HQLfpc5eeuLiCP7Fj01H+AWgl/wC0kn8AWsl/MkC/AekAtJIOQCvpALSSDkAr6QpA6d2O7LV5li8Z/QS8X2Z+z17beJqLfPDnz33px4HM9E19V8gUkfOfywGldzuy1+bB3RDO4Nskpx3d/vqmxzOnucgvv/5X0//8vpeZvqnvCpkishW8HFC605i9Ns/yJYO2KE8W9jekPXr+B+f8ucgHf/m96Rd/+D0nM31T3+UyVWQreDmgdK86e22e5UsGVTj1lr1nr78c7FzkF3/04+mDv/h7JzN9U981MllkK3g5oPRuR/baPMuXDKxw+xfeszdrOxf53y81QCwzfVPfNTJZZCu4kwfha/O4myEDTzzum7mPgu7c4kH0pr5rZI7yoA0xiF+bx3dDIANPPHrJzgOgzTFI3tR3jcz3B8Wg9G5H9to8y5cMuE1ydnJ4z96s7Vzkl1//4z6Locz0TX3XyGSRreDV66Dgbkf22jyrQBnU0tnr7T17p0wQcV4HeZnpm/qukCkir14H/YalA9BKOgCtpAPQSjoAraQD0Eo6AK2kA9BKOgCtpAcB6N1PfWf68MXP34vsBwFoeu3p03/3kh4GoP/7rX/77R/ej+iHAWh6t3ztniQ/EECvlafvSfLDAPTeU//94j250IMA9OENnfeeup8g9CAAvfbpn06/+vbT9yL7QQC6z3QAWkkHoJV0AFpJB6CVdABaSQeglXQAWkkHoJV0AFpJ/w+st3QqrAp4BAAAAABJRU5ErkJggg==" /><!-- --></p>
+<p>Under the null hypothesis this is just independent uniform data. If
+we wish to see better what the data under the alternative is, we can
+draw that case alone and also use a larger value for the parameter:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>MDgof<span class="sc">::</span><span class="fu">draw_case</span>(<span class="st">&quot;uniform.diagonal.n&quot;</span>, </span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>                  <span class="at">Continuous=</span><span class="cn">TRUE</span>,  </span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>                  <span class="at">WithEstimation=</span><span class="cn">FALSE</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>                  <span class="at">Dim=</span><span class="dv">2</span>, <span class="at">AltOnly=</span><span class="cn">TRUE</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>                 <span class="at">palt=</span><span class="fl">0.6</span>)</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<p>In the case studies for 5 dimensional data there are <span class="math inline">\({{5}\choose{2}}=10\)</span> pairwise plots. To
+select any two of them use the Dms argument. As an example, let’s say we
+wish to visualize the second and fourth dimensions of the alternative of
+the third case study:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>MDgof<span class="sc">::</span><span class="fu">draw_case</span>(<span class="dv">3</span>,<span class="at">Dim=</span><span class="dv">5</span>, <span class="at">AltOnly=</span><span class="cn">TRUE</span>, <span class="at">Dms=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; Using 0.15 for alternative</span></span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<div id="continuous-data-dim2-equal-marginals-no-parameter-estimation" class="section level2">
+<h2>Continuous Data, dim=2, equal marginals, no parameter
+estimation</h2>
+<p>These studies are designed in such a way that the marginals are the
+same under the null and the alternative hypothesis, so that running any
+1-D goodness-of-fit tests on the marginals would not detect any
+differences.</p>
+<p>The text in italics is the name of the study.</p>
+<ol style="list-style-type: decimal">
+<li>Uniform with diagonal stripe (<em>uniform.diagonal.n</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim U[0,1]\)</span>,
+independent</p>
+<p>Alternative: a diagonal stripe is added to uniform</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Uniform with a different diagonal stripe
+(<em>uniform.diagonal.b</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim U[0,1]\)</span>,
+independent<br />
+Alternative: a diagonal stripe of differing width is added.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Normal with different correlations (<em>normal.sig</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim N(0,1)\)</span>,
+independent</p>
+<p>Alternative: <span class="math inline">\(X,Y\sim N(0,1)\)</span><span class="math inline">\(cor(X,Y)=\sigma\)</span>.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>t distribution with 5 degrees of freedom with different correlations
+(<em>t.sig</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim
+t(df=5)\)</span>, independent</p>
+<p>Alternative: <span class="math inline">\(X,Y\sim
+t(df=5)\)</span><span class="math inline">\(cor(X,Y)=\sigma\)</span>.</p>
+<p>Studies 5 - 10: Uniform vs various copulas</p>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim U[0,1]\)</span>,
+independent Alternative: a copula.</p>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Frank Copula (<em>uniform.Frank</em>)</p></li>
+<li><p>Clayton Copula (<em>uniform.Clayton</em>)</p></li>
+<li><p>Gumbel Copula (<em>uniform.Gumbel</em>)</p></li>
+<li><p>Galambos Copula (<em>uniform.Galambos</em>)</p></li>
+<li><p>HuslerReiss Copula (<em>uniform.HuslerReiss</em>)</p></li>
+<li><p>Joe Copula (<em>uniform.Joe</em>)</p></li>
+</ol>
+<p>11 - 15: Mixtures of two Copulas</p>
+<p>Null Hypothesis: 50-50 mixture of two copulas</p>
+<p>Alternative: <span class="math inline">\((\alpha,
+1-\alpha)100\)</span> mixture of the same two copulas.</p>
+<ol start="11" style="list-style-type: decimal">
+<li><p>Clayton and Gumbel Copulas (<em>mix.Clayton.Gumbel</em>)</p></li>
+<li><p>Uniform and Frank Copulas (<em>mix.uniform.Frank</em>)</p></li>
+<li><p>Clayton and Frank Copulas (<em>mix.Clayton.Frank</em>)</p></li>
+<li><p>Frank and Gumbel Copulas (<em>mix.Frank.Clayton</em>)</p></li>
+<li><p>Frank and Joe Copulas (<em>mix.Frank.Joe</em>)</p></li>
+</ol>
+</div>
+<div id="continuous-data-dim2-unequal-marginals-no-parameter-estimation" class="section level2">
+<h2>Continuous Data, dim=2, unequal marginals, no parameter
+estimation</h2>
+<p>In these case studies one dimensional goodness-of-fit tests on the
+marginal distributions would also detect differences.</p>
+<ol start="16" style="list-style-type: decimal">
+<li>Normal with different mean in one dimension
+(<em>normal.shift-one.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim N(0,1)\)</span>,
+independent.</p>
+<p>Alternative: <span class="math inline">\(X\sim N(0,1),Y\sim
+N(s,1)\)</span>, independent.</p>
+<ol start="17" style="list-style-type: decimal">
+<li>Normal with different means in both dimensions
+(<em>normal.shift-two.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim N(0,1)\)</span>,
+independent.</p>
+<p>Alternative: <span class="math inline">\(X,Y\sim N(s,1)\)</span>,
+independent.</p>
+<ol start="18" style="list-style-type: decimal">
+<li>Normal with different variance in one dimension
+(<em>normal.stretch-one.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim N(0,1)\)</span>,
+independent.</p>
+<p>Alternative: <span class="math inline">\(X\sim N(0,1),Y\sim
+N(0,s)\)</span>, independent.</p>
+<ol start="19" style="list-style-type: decimal">
+<li>Normal with different variance in both dimensions
+(<em>normal.stretch-two.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim N(0,1)\)</span>,
+independent.</p>
+<p>Alternative: <span class="math inline">\(X,Y\sim N(0,s)\)</span>,
+independent.</p>
+<ol start="20" style="list-style-type: decimal">
+<li>Normal with different mean and variance in one dimension
+(<em>normal.stretch-shift-one.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim N(0,1)\)</span>,
+independent.</p>
+<p>Alternative: <span class="math inline">\(X\sim N(s,s+1),Y\sim
+N(0,1)\)</span>, independent.</p>
+<ol start="21" style="list-style-type: decimal">
+<li>Normal with different means and variances in both dimensions
+(<em>normal.stretch-two.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim N(0,1)\)</span>,
+independent.</p>
+<p>Alternative: <span class="math inline">\(X,Y\sim N(s,s+1)\)</span>,
+independent.</p>
+<ol start="22" style="list-style-type: decimal">
+<li>Uniform with rotation (<em>uniform.rotate.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim U(0,1)\)</span>,
+independent.</p>
+<p>Alternative: <span class="math inline">\(X,Y\sim U(0,1)\)</span>,
+rotated.</p>
+<ol start="23" style="list-style-type: decimal">
+<li>Uniform vs Beta(1,a) (<em>uniform.beta-one.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim U[0,1]\)</span>,
+independent.</p>
+<p>Alternative: <span class="math inline">\(X,Y\sim Beta(1,a)\)</span>,
+independent.</p>
+<ol start="24" style="list-style-type: decimal">
+<li>Uniform vs Beta(a,a) (<em>uniform.beta-two.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim U[0,1]\)</span>,
+independent.</p>
+<p>Alternative: <span class="math inline">\(X,Y\sim Beta(a,a)\)</span>,
+independent.</p>
+<ol start="25" style="list-style-type: decimal">
+<li>Uniform and conditional exponential in one dimension
+(<em>uni-exp-1.uni-exp-l.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X\sim U[0,1], Y|X=x\sim
+Exp(x+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X\sim U[0,1], Y|X=x\sim
+Exp(a(x+1))\)</span></p>
+<ol start="26" style="list-style-type: decimal">
+<li>Exponential and conditional exponential
+(<em>exp-exp-1.exp-exp-l.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X\sim Exp(1), Y|X=x\sim
+Exp(x+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X\sim Exp(1), Y|X=x\sim
+Exp(a(x+1))\)</span>.</p>
+<ol start="27" style="list-style-type: decimal">
+<li>Beta and conditional normal mean
+(<em>beta-nor-1.beta-nor-mean.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X\sim Beta(2,2),
+Y|X=x\sim N(x, 1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X\sim Beta(a,a), Y|X=x\sim
+N(x,1)\)</span>.</p>
+<ol start="28" style="list-style-type: decimal">
+<li>Beta and conditional normal variance
+(<em>beta-nor-1.beta-nor-sd.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X\sim Beta(2,2),
+Y|X=x\sim N(0, x)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X\sim Beta(a,a), Y|X=x\sim
+N(0, x)\)</span>.</p>
+<ol start="29" style="list-style-type: decimal">
+<li>Beta and conditional beta
+(<em>beta-beta-2.beta-beta-a.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X\sim Beta(2,2),
+Y|X=x\sim Beta(x+1, x+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X\sim Beta(a,a), Y|X=x\sim
+Beta(x+1, x+1)\)</span>.</p>
+<ol start="30" style="list-style-type: decimal">
+<li>Beta and conditional normal (<em>beta05.normal.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X\sim Beta(1/2,1/2),
+Y|X=x\sim N(2x, 1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X\sim Beta(1/2,1/2),
+Y|X=x\sim N(2x, s)\)</span>.</p>
+</div>
+<div id="continuous-data-d2-equal-marginals-with-parameter-estimation" class="section level2">
+<h2>Continuous Data, d=2, equal marginals, with parameter
+estimation</h2>
+<ol start="31" style="list-style-type: decimal">
+<li>Normal with covariance estimated, alternative is t distribution with
+3 degrees (<em>normal-sigma.t</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X,Y\sim N(0, 1),
+cor(X,Y)=s\)</span>, s estimated.</p>
+<p>Alternative: <span class="math inline">\(X\sim t(8)\)</span>,
+independent.</p>
+<p>32-37: Copulas with parameter estimated, alternative has an added
+diagonal stripe.</p>
+<ol start="32" style="list-style-type: decimal">
+<li><p>Frank copula (<em>Frank.Frank</em>)</p></li>
+<li><p>Clayton copula (<em>Clayton.Clayton</em>)</p></li>
+<li><p>Gumbel copula (<em>Gumbel.Gumbel</em>)</p></li>
+<li><p>Galambos copula (<em>Galambos.Galambos</em>)</p></li>
+<li><p>HuslerReiss copula (<em>HuslerReiss.HuslerReiss</em>)</p></li>
+<li><p>Joe copula (<em>Joe.Joe</em>)</p></li>
+</ol>
+<p>38-42: Mixtures of copulas, with mixture ratio estimated, alternative
+uses a different parameter for copula.</p>
+<ol start="38" style="list-style-type: decimal">
+<li><p>Uniform and Frank copulas (<em>mix.uniform.Frank</em>)</p></li>
+<li><p>Clayton and Frank copulas (<em>mix.Clayton.Frank</em>)</p></li>
+<li><p>Clayton and Clayton (with different parameters) copulas
+(<em>mix.Clayton.Clayton</em>)</p></li>
+<li><p>Uniform and Joe copulas (<em>mix.uniform.Joe</em>)</p></li>
+<li><p>Uniform and Plakett copulas
+(<em>mix.uniform.Plakett</em>)</p></li>
+</ol>
+<p>43-45: Copulas with the marginal(s) transformed, with the parameter
+of the transformation estimated.</p>
+<ol start="43" style="list-style-type: decimal">
+<li><p>Clayton copula with y marginal transformed by a normal
+distribution with variance estimated.
+(<em>Clayton.marginal.normal-sigma</em>)</p></li>
+<li><p>Gumbel copula with both marginals transformed by a normal
+distribution with variance estimated.
+(<em>Gumbel.marginal.normal-sigma</em>)</p></li>
+<li><p>Joe copula with both marginals transformed by an exponential
+distribution with rates estimated.
+(<em>Joe.marginal.exponential</em>)</p></li>
+</ol>
+</div>
+<div id="d2-unequal-marginals-with-parameter-estimation" class="section level2">
+<h2>D=2, unequal marginals, with parameter estimation</h2>
+<ol start="46" style="list-style-type: decimal">
+<li>Normal distribution with means estimated. Alternative is a t
+distribution (<em>normal-mean.t.marginal</em>)</li>
+</ol>
+<p>47-54: Copulas with marginals transformed by various distributions.
+Parameter of distribution is estimated.</p>
+<ol start="47" style="list-style-type: decimal">
+<li><p>Clayton copula with marginals transformed by normal distributions
+with different variances.
+(<em>Clayton.marginal.normal.marginal</em>)</p></li>
+<li><p>Joe copula with marginals transformed by exponential
+distributions with different rates.
+(<em>Joe.marginal.exponential.marginal</em>)</p></li>
+<li><p>Plakett copula with marginals transformed by Beta(a,a)
+distributions. (<em>Plakett.marginal.beta22.marginal</em>)</p></li>
+<li><p>Frank copula with marginals transformed by double exponential
+distributions with different rates.
+(<em>Frank.marginal.dblexp.marginal</em>)</p></li>
+<li><p>Frank copula with marginals transformed by linear distributions
+with different slopes.
+(<em>Frank.marginal.linear.marginal</em>)</p></li>
+<li><p>Joe copula with marginals transformed by truncated exponential
+distributions with different rates.
+(<em>Joe.marginal.truncexp.marginal</em>)</p></li>
+<li><p>Clayton copula with marginals transformed by Beta(a,1)
+distribution with different a.
+(<em>Clayton.marginal.betaa1.marginal</em>)</p></li>
+</ol>
+<p>54-60: Distributions of the form <span class="math inline">\(X\sim F,
+Y|X=x\sim G(y|x)\)</span></p>
+<ol start="54" style="list-style-type: decimal">
+<li><p><span class="math inline">\(X\sim Beta(2, 2), Y|X=x\sim N(\mu,
+x)\)</span><span class="math inline">\(\mu\)</span> estimated
+(<em>beta22.marginal.normal-mean.marginal</em>)</p></li>
+<li><p><span class="math inline">\(X\sim Beta(2, 2), Y|X=x\sim N(x,
+\sigma)\)</span><span class="math inline">\(\sigma\)</span> estimated
+(<em>beta22.marginal.normal-sd.marginal</em>)</p></li>
+<li><p><span class="math inline">\(X\sim Beta(2, 2), Y|X=x\sim
+LN(\mu,x)\)</span><span class="math inline">\(\sigma\)</span> estimated
+(<em>beta22.marginal.lognormal-mean.marginal</em>)</p></li>
+<li><p><span class="math inline">\(X\sim Beta(2, 2), Y|X=x\sim LN(x,
+\sigma)\)</span><span class="math inline">\(\sigma\)</span> estimated
+(<em>beta22.marginal.lognormal-sd.marginal</em>)</p></li>
+<li><p><span class="math inline">\(X\sim Beta(2, 2), Y|X=x\sim
+Exp((x+1)\lambda)\)</span><span class="math inline">\(\lambda\)</span>
+estimated (<em>beta22.marginal.exponential.marginal</em>)</p></li>
+<li><p><span class="math inline">\(X\sim Exp(1), Y|X=x\sim
+N(x,\sigma)\)</span><span class="math inline">\(\sigma\)</span>
+estimated (<em>exp1.marginal.normal-sd.marginal</em>)</p></li>
+<li><p><span class="math inline">\(X\sim Beta(1/2, 1/2), Y|X=x\sim
+\Gamma(x+1,\beta)\)</span><span class="math inline">\(\beta\)</span>
+estimated (<em>beta05.marginal.gamma.marginal</em>)</p></li>
+</ol>
+</div>
+<div id="continuous-data-dim5-equal-marginals-no-parameter-estimation" class="section level2">
+<h2>Continuous Data, dim=5, equal marginals, no parameter
+estimation</h2>
+<ol start="61" style="list-style-type: decimal">
+<li>Uniforms with diagonal stripes (<em>uniform.diagonal.n</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim U(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim
+N(0,1)\)</span> all with a diagonal stripe added.</p>
+<ol start="62" style="list-style-type: decimal">
+<li>Uniforms with diagonal stripes (<em>uniform.diagonal.b</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim U(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim U(0,
+1)\)</span>, all with a different diagonal stripe added.</p>
+<ol start="63" style="list-style-type: decimal">
+<li>Normal with different correlation matrix
+(<em>normal.sigA</em>)<br />
+Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim N(0,
+1)\)</span>.</li>
+</ol>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim N(0,1),
+cor(X_i,X_j)=s\)</span> for all i and j.</p>
+<ol start="64" style="list-style-type: decimal">
+<li>Normal with different correlation matrix (<em>normal.sigB</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim N(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim N(0,1),
+cor(X_i,X_j)=s\)</span> for some (not all) i and j.</p>
+<ol start="65" style="list-style-type: decimal">
+<li>t(5) with correlation (<em>t.sig</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim
+t(df=5)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim t(df=5),
+cor(X_i,X_j)=s\)</span> for all i and j.</p>
+<p>66-69: Uniform vs copula</p>
+<ol start="66" style="list-style-type: decimal">
+<li><p>Frank copula (<em>uniform.Frank</em>)</p></li>
+<li><p>Clayton copula (<em>uniform.Clayton</em>)</p></li>
+<li><p>Gumbel copula (<em>uniform.Gumbel</em>)</p></li>
+<li><p>Joe copula (<em>uniform.Joe</em>)</p></li>
+</ol>
+<p>70-75 Mixtures of different copulas, with 50-50 mixture under the
+null hypothesis and <span class="math inline">\((\lambda,
+1-\lambda)\)</span> mixture under alternative.</p>
+<ol start="70" style="list-style-type: decimal">
+<li><p>Uniform and Clayton (<em>mix.uniform.Clayton</em>)</p></li>
+<li><p>Clayton and Gumbel (<em>mix.Clayton.Gumbel</em>)</p></li>
+<li><p>Uniform and Frank (<em>mix.uniform.Frank</em>)</p></li>
+<li><p>Clayton and Frank (<em>mix.Clayton.Frank</em>)</p></li>
+<li><p>Frank and Gumbel (<em>mix.Frank.Gumbel</em>)</p></li>
+<li><p>Frank and Joe (<em>mix.Frank.Joe</em>)</p></li>
+</ol>
+</div>
+<div id="continuous-data-dim5-unequal-marginals-no-parameter-estimation" class="section level2">
+<h2>Continuous Data, dim=5, unequal marginals, no parameter
+estimation</h2>
+<ol start="76" style="list-style-type: decimal">
+<li>Normal distributions (<em>normal.shift-one.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim N(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1\sim(\mu, 1),
+X_2,..,X_5\sim N(0,1)\)</span>.</p>
+<ol start="77" style="list-style-type: decimal">
+<li>Normal distributions (<em>normal.shift-all.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim N(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim
+N(\mu,1)\)</span>.</p>
+<ol start="78" style="list-style-type: decimal">
+<li>(<em>normal.stretch-one.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim N(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1\sim(0, \sigma),
+X_2,..,X_5\sim N(0,1)\)</span>.</p>
+<ol start="79" style="list-style-type: decimal">
+<li>Normal distributions (<em>normal.stretch-all.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim N(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim
+N(0,\sigma)\)</span>.</p>
+<ol start="80" style="list-style-type: decimal">
+<li>Normal distributions
+(<em>normal.stretch-shift-one.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim N(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1\sim(\mu, \sigma),
+X_2,..,X_5\sim N(0,1)\)</span>.</p>
+<ol start="81" style="list-style-type: decimal">
+<li>Normal distributons
+(<em>normal.stretch-shift-all.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim N(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim
+N(\mu,\sigma)\)</span>.</p>
+<ol start="82" style="list-style-type: decimal">
+<li><p>Rotated Uniforms (<em>uniform.rotate.marginal</em>)</p></li>
+<li><p>Uniform vs Beta (<em>uniform.beta-one.marginal</em>)</p></li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim U(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim
+Beta(1,\beta)\)</span>.</p>
+<ol start="84" style="list-style-type: decimal">
+<li>Uniform vs. Beta (<em>uniform.beta-two.marginal</em>)</li>
+</ol>
+<p>Null Hypothesis: <span class="math inline">\(X_1,..,X_5\sim U(0,
+1)\)</span>.</p>
+<p>Alternative: <span class="math inline">\(X_1,..,X_5\sim
+Beta(\alpha,\alpha)\)</span>.</p>
+<p>85-90: In these 6 case studies data is generated in five dimensions
+from some distribution independently, and then transformed with each
+dimensions independently.</p>
+<ol start="85" style="list-style-type: decimal">
+<li><p>Base Uniform, all dimensions transformed by normal distributions
+with different mean and standard deviations
+(<em>uniform.all-normal.marginal</em>).</p></li>
+<li><p>Base Beta(2,2), all dimensions transformed by normal
+distributions with different mean and standard deviations
+(<em>beta22.all-normal.marginal</em>).</p></li>
+<li><p>Base Uniform, all dimensions transformed by beta distributions
+with different parameters (<em>uniform.all-beta.marginal</em>).</p></li>
+<li><p>Base Uniform, all dimensions transformed by exponential
+distributions with different rates
+(<em>uniform.all-exp.marginal</em>)</p></li>
+<li><p>Base Uniform, all dimensions transformed by gamma distributions
+with different parameters (<em>uniform.all-gamma.marginal</em>)</p></li>
+<li><p>Base Uniform, all dimensions transformed by different
+distributions (normal, gamma and beta)
+(<em>uniform.different.marginal</em>).</p></li>
+</ol>
+</div>
+<div id="discrete-data" class="section level2">
+<h2>Discrete data</h2>
+<p>The discrete data cases are the same as the continuous ones with
+dim=2, and the data is then binned into a 5x5 grid. For example, for the
+case study for <em>uniform.diagonal.n</em> (#1) a data set might look
+like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>tmp<span class="ot">=</span>MDgof<span class="sc">::</span><span class="fu">case.studies</span>(<span class="dv">1</span>, F, F)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>x<span class="ot">=</span>tmp<span class="sc">$</span><span class="fu">rnull</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>x</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt;       [,1] [,2] [,3]</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt;  [1,]  0.2  0.2    5</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt;  [2,]  0.4  0.2   14</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt;  [3,]  0.6  0.2   12</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt;  [4,]  0.8  0.2    7</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;  [5,]  1.0  0.2   11</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt;  [6,]  0.2  0.4   15</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt;  [7,]  0.4  0.4    7</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt;  [8,]  0.6  0.4   11</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt;  [9,]  0.8  0.4   12</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; [10,]  1.0  0.4    8</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; [11,]  0.2  0.6    9</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; [12,]  0.4  0.6    5</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; [13,]  0.6  0.6   12</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; [14,]  0.8  0.6   12</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; [15,]  1.0  0.6    8</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; [16,]  0.2  0.8   10</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; [17,]  0.4  0.8   14</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; [18,]  0.6  0.8   12</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; [19,]  0.8  0.8    9</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; [20,]  1.0  0.8   15</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt; [21,]  0.2  1.0    6</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt; [22,]  0.4  1.0   14</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt; [23,]  0.6  1.0    8</span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co">#&gt; [24,]  0.8  1.0    6</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co">#&gt; [25,]  1.0  1.0    8</span></span></code></pre></div>
+<p>The bins and their counts are shown here:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="at">type=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">6</span>) {</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="fu">segments</span>(i<span class="sc">/</span><span class="dv">5</span>,<span class="dv">0</span>,i<span class="sc">/</span><span class="dv">5</span>,<span class="dv">1</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">segments</span>(<span class="dv">0</span><span class="sc">/</span><span class="dv">5</span>,i<span class="sc">/</span><span class="dv">5</span>,<span class="dv">1</span>,i<span class="sc">/</span><span class="dv">5</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>}</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="fu">text</span>(j<span class="sc">/</span><span class="dv">5</span><span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, i<span class="sc">/</span><span class="dv">5</span><span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, x[<span class="dv">5</span><span class="sc">*</span>i<span class="sc">+</span>j<span class="sc">+</span><span class="dv">1</span>,<span class="dv">3</span>])</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>}</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

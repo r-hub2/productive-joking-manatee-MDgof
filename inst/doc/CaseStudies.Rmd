@@ -1,0 +1,429 @@
+---
+title: "Case Studies"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Case Studies}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error=TRUE,
+                      message = FALSE, warning = FALSE)
+library(MDgof)
+```
+
+This vignette lists the case studies included in the package. They all create data sets with $n=250$ observations and power studies are done with a type I error probability $\alpha=0.05$. The discrete data cases are the same as for continuous data, with the data binned in 5x5 grids.
+
+To visualize a case study *MDgof* includes the routine *draw_case*. Let's say we want to have a look at the first case study discussed below, called *uniform.diagonal.n*, for continuous data without parameter estimation in two dimensions:
+
+```{r message=TRUE}
+MDgof::draw_case("uniform.diagonal.n", 
+                  Continuous=TRUE,  
+                  WithEstimation=FALSE, 
+                  Dim=2)
+```
+
+Under the null hypothesis this is just independent uniform data. If we wish to see better what the data under the alternative is, we can draw that case alone and also use a larger value for the parameter:
+
+```{r message=TRUE}
+MDgof::draw_case("uniform.diagonal.n", 
+                  Continuous=TRUE,  
+                  WithEstimation=FALSE, 
+                  Dim=2, AltOnly=TRUE,
+                 palt=0.6)
+```
+
+In the case studies for 5 dimensional data there are ${{5}\choose{2}}=10$ pairwise plots. To select any two of them use the Dms argument. As an example, let's say we wish to visualize the second and fourth dimensions of the alternative of the third case study: 
+
+```{r message=TRUE}
+MDgof::draw_case(3,Dim=5, AltOnly=TRUE, Dms=c(2,4))
+```
+
+## Continuous Data, dim=2, equal marginals, no parameter estimation
+
+These studies are designed in such a way that the marginals are the same under the null and the alternative hypothesis, so that running any 1-D goodness-of-fit tests on the marginals would not detect any differences.
+
+The text in italics is the name of the study.
+
+1. Uniform with diagonal stripe (*uniform.diagonal.n*)
+
+Null Hypothesis: $X,Y\sim U[0,1]$, independent  
+
+Alternative: a diagonal stripe is added to uniform
+
+2. Uniform with a different diagonal stripe (*uniform.diagonal.b*)
+
+Null Hypothesis: $X,Y\sim U[0,1]$, independent  
+Alternative: a diagonal stripe of differing width is added.
+
+3. Normal with different correlations (*normal.sig*)
+
+Null Hypothesis: $X,Y\sim N(0,1)$, independent  
+
+Alternative: $X,Y\sim N(0,1)$$cor(X,Y)=\sigma$.
+
+4. t distribution with 5 degrees of freedom with different correlations (*t.sig*)
+
+Null Hypothesis: $X,Y\sim t(df=5)$, independent  
+
+Alternative: $X,Y\sim t(df=5)$$cor(X,Y)=\sigma$.
+
+Studies 5 - 10: Uniform vs various copulas 
+
+Null Hypothesis: $X,Y\sim U[0,1]$, independent
+Alternative: a copula.
+
+5. Frank Copula (*uniform.Frank*)
+
+6. Clayton Copula (*uniform.Clayton*)
+
+7. Gumbel Copula (*uniform.Gumbel*)
+
+8. Galambos Copula (*uniform.Galambos*)
+
+9. HuslerReiss Copula (*uniform.HuslerReiss*)
+
+10. Joe Copula (*uniform.Joe*)
+
+11 - 15: Mixtures of two Copulas
+
+Null Hypothesis:  50-50 mixture of two copulas
+
+Alternative: $(\alpha, 1-\alpha)100$ mixture of the same two copulas.
+
+11. Clayton and Gumbel Copulas (*mix.Clayton.Gumbel*)
+
+12. Uniform and Frank Copulas (*mix.uniform.Frank*)
+
+13. Clayton and Frank Copulas (*mix.Clayton.Frank*)
+
+14. Frank and Gumbel Copulas (*mix.Frank.Clayton*)
+
+15. Frank and Joe Copulas (*mix.Frank.Joe*)
+
+## Continuous Data, dim=2, unequal marginals, no parameter estimation
+
+In these case studies one dimensional goodness-of-fit tests on the marginal distributions would also detect differences.
+
+16. Normal with different mean in one dimension (*normal.shift-one.marginal*)
+
+Null Hypothesis: $X,Y\sim N(0,1)$, independent.  
+
+Alternative: $X\sim N(0,1),Y\sim N(s,1)$, independent.
+
+17. Normal with different means in both dimensions (*normal.shift-two.marginal*)
+
+Null Hypothesis: $X,Y\sim N(0,1)$, independent.  
+
+Alternative: $X,Y\sim N(s,1)$, independent.
+
+18. Normal with different variance in one dimension (*normal.stretch-one.marginal*)
+
+Null Hypothesis: $X,Y\sim N(0,1)$, independent.  
+
+Alternative: $X\sim N(0,1),Y\sim N(0,s)$, independent.
+
+19. Normal with different variance in both dimensions (*normal.stretch-two.marginal*)
+
+Null Hypothesis: $X,Y\sim N(0,1)$, independent.  
+
+Alternative: $X,Y\sim N(0,s)$, independent.
+
+20. Normal with different mean and variance in one dimension (*normal.stretch-shift-one.marginal*)
+
+Null Hypothesis: $X,Y\sim N(0,1)$, independent.  
+
+Alternative: $X\sim N(s,s+1),Y\sim N(0,1)$, independent.
+
+21. Normal with different means and variances in both dimensions (*normal.stretch-two.marginal*)
+
+Null Hypothesis: $X,Y\sim N(0,1)$, independent.
+
+Alternative: $X,Y\sim N(s,s+1)$, independent.
+
+22. Uniform with rotation (*uniform.rotate.marginal*)
+
+Null Hypothesis: $X,Y\sim U(0,1)$, independent.
+
+Alternative: $X,Y\sim U(0,1)$, rotated.
+
+23. Uniform vs Beta(1,a) (*uniform.beta-one.marginal*)
+
+Null Hypothesis: $X,Y\sim U[0,1]$, independent.
+
+Alternative: $X,Y\sim Beta(1,a)$, independent.
+
+24. Uniform vs Beta(a,a) (*uniform.beta-two.marginal*)
+
+Null Hypothesis: $X,Y\sim U[0,1]$, independent.
+
+Alternative: $X,Y\sim Beta(a,a)$, independent.
+
+25. Uniform and conditional exponential in one dimension (*uni-exp-1.uni-exp-l.marginal*)
+
+Null Hypothesis: $X\sim U[0,1], Y|X=x\sim Exp(x+1)$.
+
+Alternative: $X\sim U[0,1], Y|X=x\sim Exp(a(x+1))$
+
+26. Exponential and conditional exponential (*exp-exp-1.exp-exp-l.marginal*)
+
+Null Hypothesis: $X\sim Exp(1), Y|X=x\sim Exp(x+1)$.
+
+Alternative: $X\sim Exp(1), Y|X=x\sim Exp(a(x+1))$.
+
+27. Beta and conditional normal mean (*beta-nor-1.beta-nor-mean.marginal*)
+
+Null Hypothesis: $X\sim Beta(2,2), Y|X=x\sim N(x, 1)$.
+
+Alternative: $X\sim Beta(a,a), Y|X=x\sim N(x,1)$.
+
+28. Beta and conditional normal variance (*beta-nor-1.beta-nor-sd.marginal*)
+
+Null Hypothesis: $X\sim Beta(2,2), Y|X=x\sim N(0, x)$.
+
+Alternative: $X\sim Beta(a,a), Y|X=x\sim N(0, x)$.
+
+29. Beta and conditional beta (*beta-beta-2.beta-beta-a.marginal*)
+
+Null Hypothesis: $X\sim Beta(2,2), Y|X=x\sim Beta(x+1, x+1)$.
+
+Alternative: $X\sim Beta(a,a), Y|X=x\sim Beta(x+1, x+1)$.
+
+30. Beta and conditional normal (*beta05.normal.marginal*)
+
+Null Hypothesis: $X\sim Beta(1/2,1/2), Y|X=x\sim N(2x, 1)$.
+
+Alternative: $X\sim Beta(1/2,1/2), Y|X=x\sim N(2x, s)$.
+
+## Continuous Data, d=2, equal marginals, with parameter estimation
+
+31. Normal with covariance estimated, alternative is t distribution with 3 degrees (*normal-sigma.t*)
+
+Null Hypothesis: $X,Y\sim N(0, 1), cor(X,Y)=s$, s estimated.
+
+Alternative: $X\sim t(8)$, independent.
+
+32-37: Copulas with parameter estimated, alternative has an added diagonal stripe.
+
+32. Frank copula (*Frank.Frank*)
+
+33. Clayton copula (*Clayton.Clayton*)
+
+34. Gumbel copula (*Gumbel.Gumbel*)
+
+35. Galambos copula (*Galambos.Galambos*)
+
+36. HuslerReiss copula (*HuslerReiss.HuslerReiss*)
+
+37. Joe copula (*Joe.Joe*)
+
+38-42: Mixtures of copulas, with mixture ratio estimated, alternative uses a different parameter for copula.
+
+38. Uniform and Frank copulas (*mix.uniform.Frank*)
+
+39. Clayton and Frank copulas (*mix.Clayton.Frank*)
+
+40. Clayton and Clayton (with different parameters) copulas (*mix.Clayton.Clayton*)
+
+41. Uniform and Joe copulas (*mix.uniform.Joe*)
+
+42. Uniform and Plakett copulas (*mix.uniform.Plakett*)
+
+43-45: Copulas with the marginal(s) transformed, with the parameter of the transformation estimated.
+
+43. Clayton copula with y marginal transformed by a normal distribution with variance estimated. (*Clayton.marginal.normal-sigma*)
+
+44. Gumbel copula with both marginals transformed by a normal distribution with variance estimated. (*Gumbel.marginal.normal-sigma*)
+
+45. Joe copula with both marginals transformed by an exponential distribution with rates estimated. (*Joe.marginal.exponential*)
+
+## D=2, unequal marginals, with parameter estimation
+
+46. Normal distribution with means estimated. Alternative is a t distribution (*normal-mean.t.marginal*)
+
+47-54: Copulas with marginals transformed by various distributions. Parameter of distribution is estimated.
+
+47. Clayton copula with marginals transformed by normal distributions with different variances. (*Clayton.marginal.normal.marginal*)
+
+48. Joe copula with marginals transformed by exponential distributions with different rates. (*Joe.marginal.exponential.marginal*)
+
+49. Plakett copula with marginals transformed by Beta(a,a) distributions. (*Plakett.marginal.beta22.marginal*)
+
+50. Frank copula with marginals transformed by double exponential distributions with different rates. (*Frank.marginal.dblexp.marginal*)
+
+51. Frank copula with marginals transformed by linear distributions with different slopes. (*Frank.marginal.linear.marginal*)
+
+52. Joe copula with marginals transformed by truncated exponential distributions with different rates. (*Joe.marginal.truncexp.marginal*)
+
+53. Clayton copula with marginals transformed by Beta(a,1) distribution with different a. (*Clayton.marginal.betaa1.marginal*)
+
+54-60: Distributions of the form $X\sim F, Y|X=x\sim G(y|x)$
+
+54.  $X\sim Beta(2, 2), Y|X=x\sim N(\mu, x)$$\mu$ estimated (*beta22.marginal.normal-mean.marginal*)
+
+55.  $X\sim Beta(2, 2), Y|X=x\sim N(x, \sigma)$$\sigma$ estimated (*beta22.marginal.normal-sd.marginal*)
+
+56.  $X\sim Beta(2, 2), Y|X=x\sim LN(\mu,x)$$\sigma$ estimated (*beta22.marginal.lognormal-mean.marginal*)
+
+57.  $X\sim Beta(2, 2), Y|X=x\sim LN(x, \sigma)$$\sigma$ estimated (*beta22.marginal.lognormal-sd.marginal*)
+
+58.  $X\sim Beta(2, 2), Y|X=x\sim Exp((x+1)\lambda)$$\lambda$ estimated (*beta22.marginal.exponential.marginal*)
+
+59.  $X\sim Exp(1), Y|X=x\sim N(x,\sigma)$$\sigma$ estimated (*exp1.marginal.normal-sd.marginal*)
+
+60.  $X\sim Beta(1/2, 1/2), Y|X=x\sim \Gamma(x+1,\beta)$$\beta$ estimated (*beta05.marginal.gamma.marginal*)
+
+## Continuous Data, dim=5, equal marginals, no parameter estimation
+
+61. Uniforms with diagonal stripes (*uniform.diagonal.n*)               
+
+Null Hypothesis: $X_1,..,X_5\sim U(0, 1)$.
+
+Alternative: $X_1,..,X_5\sim N(0,1)$  all with a diagonal stripe added.
+
+62. Uniforms with diagonal stripes (*uniform.diagonal.b*)
+
+Null Hypothesis: $X_1,..,X_5\sim U(0, 1)$.
+
+Alternative: $X_1,..,X_5\sim U(0, 1)$, all with a different diagonal stripe added.
+
+63. Normal with different correlation matrix (*normal.sigA*)                      
+Null Hypothesis: $X_1,..,X_5\sim N(0, 1)$.
+
+Alternative: $X_1,..,X_5\sim N(0,1), cor(X_i,X_j)=s$ for all i and j.
+
+64. Normal with different correlation matrix (*normal.sigB*)            
+
+Null Hypothesis: $X_1,..,X_5\sim N(0, 1)$.
+
+Alternative: $X_1,..,X_5\sim N(0,1), cor(X_i,X_j)=s$ for some (not all) i and j.
+
+65. t(5) with correlation (*t.sig*)                            
+
+Null Hypothesis: $X_1,..,X_5\sim t(df=5)$.
+
+Alternative: $X_1,..,X_5\sim t(df=5), cor(X_i,X_j)=s$ for all i and j.
+
+66-69: Uniform vs copula
+
+66. Frank copula (*uniform.Frank*)                    
+
+67. Clayton copula (*uniform.Clayton*)                  
+
+68. Gumbel copula (*uniform.Gumbel*)                   
+
+69. Joe copula (*uniform.Joe*)                      
+
+70-75 Mixtures of different copulas, with 50-50 mixture under the null hypothesis and $(\lambda, 1-\lambda)$ mixture under alternative.
+
+70. Uniform and Clayton (*mix.uniform.Clayton*)              
+
+71. Clayton and Gumbel (*mix.Clayton.Gumbel*)               
+
+72.  Uniform and Frank (*mix.uniform.Frank*)                
+
+73. Clayton and Frank (*mix.Clayton.Frank*)                
+
+74. Frank and Gumbel (*mix.Frank.Gumbel*)                 
+
+75. Frank and Joe (*mix.Frank.Joe*)                    
+
+## Continuous Data, dim=5, unequal marginals, no parameter estimation
+
+76. Normal distributions (*normal.shift-one.marginal*)        
+
+Null Hypothesis: $X_1,..,X_5\sim N(0, 1)$.
+
+Alternative: $X_1\sim(\mu, 1), X_2,..,X_5\sim N(0,1)$.
+
+77. Normal distributions (*normal.shift-all.marginal*)        
+
+Null Hypothesis: $X_1,..,X_5\sim N(0, 1)$.
+
+Alternative: $X_1,..,X_5\sim N(\mu,1)$.
+
+78. (*normal.stretch-one.marginal*)      
+
+Null Hypothesis: $X_1,..,X_5\sim N(0, 1)$.
+
+Alternative: $X_1\sim(0, \sigma), X_2,..,X_5\sim N(0,1)$.
+
+79. Normal distributions (*normal.stretch-all.marginal*)      
+
+Null Hypothesis: $X_1,..,X_5\sim N(0, 1)$.
+
+Alternative: $X_1,..,X_5\sim N(0,\sigma)$.
+
+80. Normal distributions (*normal.stretch-shift-one.marginal*)
+
+Null Hypothesis: $X_1,..,X_5\sim N(0, 1)$.
+
+Alternative: $X_1\sim(\mu, \sigma), X_2,..,X_5\sim N(0,1)$.
+
+81. Normal distributons (*normal.stretch-shift-all.marginal*)
+
+Null Hypothesis: $X_1,..,X_5\sim N(0, 1)$.
+
+Alternative: $X_1,..,X_5\sim N(\mu,\sigma)$.
+
+82. Rotated Uniforms (*uniform.rotate.marginal*)          
+
+83. Uniform vs Beta (*uniform.beta-one.marginal*)
+
+Null Hypothesis: $X_1,..,X_5\sim U(0, 1)$.
+
+Alternative: $X_1,..,X_5\sim Beta(1,\beta)$.
+
+
+84. Uniform vs. Beta (*uniform.beta-two.marginal*)        
+
+Null Hypothesis: $X_1,..,X_5\sim U(0, 1)$.
+
+Alternative: $X_1,..,X_5\sim Beta(\alpha,\alpha)$.
+
+85-90: In these 6 case studies data is generated in five dimensions from some distribution independently, and then transformed with each dimensions independently.
+
+85. Base Uniform, all dimensions transformed by normal distributions with different mean and standard deviations (*uniform.all-normal.marginal*).
+
+86. Base Beta(2,2), all dimensions transformed by normal distributions with different mean and standard deviations (*beta22.all-normal.marginal*).
+
+87. Base Uniform, all dimensions transformed by beta distributions with different parameters  (*uniform.all-beta.marginal*).
+
+88. Base Uniform, all dimensions transformed by exponential distributions with different rates (*uniform.all-exp.marginal*)         
+
+89. Base Uniform, all dimensions transformed by gamma distributions with different parameters  (*uniform.all-gamma.marginal*)       
+
+90. Base Uniform, all dimensions transformed by different distributions (normal, gamma and beta) (*uniform.different.marginal*).  
+
+## Discrete data
+
+The discrete data cases are the same as the continuous ones with dim=2, and the data is then binned into a 5x5 grid. For example, for the case study for *uniform.diagonal.n* (#1) a data set might look like this:
+
+```{r}
+tmp=MDgof::case.studies(1, F, F)
+x=tmp$rnull()
+x
+```
+
+The bins and their counts are shown here:
+
+```{r}
+plot(x, xlim=c(0,1), ylim=c(0, 1), xlab="x", ylab="y", type="n")
+for(i in 0:6) {
+  segments(i/5,0,i/5,1)
+  segments(0/5,i/5,1,i/5)
+}
+for(i in 0:4) {
+  for(j in 0:4)
+    text(j/5+1/10, i/5+1/10, x[5*i+j+1,3])
+}
+```
+
