@@ -4,12 +4,12 @@
 #include <numeric>
 using namespace Rcpp;
 
-//` R function order(x,y) for Rcpp
-//` 
-//` x first vector
-//` y second vector
-//` return a vector of integers
-//` keywords internal
+//' R function order(x,y) for Rcpp
+//' 
+//' @param x first vector
+//' @param y second vector
+//' @return  a vector of integers
+//' @keywords  internal
 // [[Rcpp::export]]
 Rcpp::IntegerVector orderC(Rcpp::NumericVector x, Rcpp::NumericVector y) {
   int n = x.size();
@@ -40,31 +40,32 @@ Rcpp::IntegerVector orderC(Rcpp::NumericVector x, Rcpp::NumericVector y) {
   return res;
 }
 
-//` Find probabilities from cdf for discrete data
-//` 
-//` x matrix with data
-//` cdf function to find distribution function
-//` p (possible) arguments for cdf
-//` return a matrix with probabilities added
-//` keywords internal
-//` @export
+//' Find probabilities from cdf for discrete data
+//' 
+//' @param  x matrix with data
+//' @param  cdf  function to find distribution function
+//' @param  p (possible) arguments for cdf
+//' @param  Fx (if available) already calculated values of cdf
+//' @return a matrix with probabilities added
+//' @export
 // [[Rcpp::export]]
-NumericMatrix p2dC(NumericMatrix x, Function cdf, 
-                   NumericVector p,
-                   NumericVector Fx=NumericVector::create(-1)) {
+Rcpp::NumericMatrix p2dC(Rcpp::NumericMatrix x, 
+                         Rcpp::Function cdf, 
+                         Rcpp::NumericVector p,
+                         Rcpp::NumericVector Fx=Rcpp::NumericVector::create(-1)) {
   int k=x.nrow(),i,j;
   NumericVector x1=unique(x(_,0));
   int nx=x1.size(),ny=k/nx;
   NumericMatrix z(k, 5);
-  if(Fx[0]<0) {
+  if(Fx[0]<0) { //need to find cdf values
     Rcpp::Environment base("package:base");
     Rcpp::Function formals_r = base["formals"];
     Rcpp::List rescdf = formals_r(Rcpp::_["fun"]=cdf);
     NumericMatrix zz=z(_,Range(0, 1));
-    if(rescdf.size()==1) Fx=cdf(zz);
-    else Fx=cdf(zz, p);
+    if(rescdf.size()==1) Fx=cdf(x);
+    else Fx=cdf(x, p);
   }
-  IntegerVector I=orderC(x(_,0), x(_,1));
+  IntegerVector I=orderC(x(_,0), x(_,1)); // reorder matrix
   for(i=0;i<k;++i) {
     for(j=0;j<3;++j) {
       z(i,j)=x(I[i]-1, j);

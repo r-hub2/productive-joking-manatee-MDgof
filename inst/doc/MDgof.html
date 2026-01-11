@@ -822,14 +822,23 @@ in</p>
 <span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a>  xvals<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span>nb[<span class="dv">1</span>]<span class="sc">/</span>nb[<span class="dv">1</span>]</span>
 <span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a>  yvals<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span>nb[<span class="dv">2</span>]<span class="sc">/</span>nb[<span class="dv">2</span>]</span>
 <span id="cb35-13"><a href="#cb35-13" tabindex="-1"></a>  z<span class="ot">=</span><span class="fu">cbind</span>(<span class="fu">rep</span>(xvals, nb[<span class="dv">2</span>]), <span class="fu">rep</span>(yvals, <span class="at">each=</span>nb[<span class="dv">1</span>]), <span class="dv">0</span>)</span>
-<span id="cb35-14"><a href="#cb35-14" tabindex="-1"></a>  prob<span class="ot">=</span><span class="fu">c</span>(<span class="fu">t</span>(MDgof<span class="sc">::</span><span class="fu">p2d</span>(z, pnull, p)))</span>
+<span id="cb35-14"><a href="#cb35-14" tabindex="-1"></a>  prob<span class="ot">=</span><span class="fu">c</span>(<span class="fu">t</span>(MDgof<span class="sc">::</span><span class="fu">p2dC</span>(z, pnull, p)))</span>
 <span id="cb35-15"><a href="#cb35-15" tabindex="-1"></a>  z[, <span class="dv">3</span>]<span class="ot">=</span><span class="fu">rbinom</span>(<span class="fu">prod</span>(nb), <span class="fl">1e6</span>, prob)</span>
 <span id="cb35-16"><a href="#cb35-16" tabindex="-1"></a>  z</span>
 <span id="cb35-17"><a href="#cb35-17" tabindex="-1"></a>}</span>
 <span id="cb35-18"><a href="#cb35-18" tabindex="-1"></a>dta_disc<span class="ot">=</span><span class="fu">rnull_disc</span>(<span class="dv">2</span>)</span>
-<span id="cb35-19"><a href="#cb35-19" tabindex="-1"></a><span class="co">#&gt; Error: &#39;p2d&#39; is not an exported object from &#39;namespace:MDgof&#39;</span></span>
-<span id="cb35-20"><a href="#cb35-20" tabindex="-1"></a>dta_disc[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span>
-<span id="cb35-21"><a href="#cb35-21" tabindex="-1"></a><span class="co">#&gt; Error: object &#39;dta_disc&#39; not found</span></span></code></pre></div>
+<span id="cb35-19"><a href="#cb35-19" tabindex="-1"></a>dta_disc[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span>
+<span id="cb35-20"><a href="#cb35-20" tabindex="-1"></a><span class="co">#&gt;       [,1]       [,2]  [,3]</span></span>
+<span id="cb35-21"><a href="#cb35-21" tabindex="-1"></a><span class="co">#&gt;  [1,] 0.02 0.03333333 20196</span></span>
+<span id="cb35-22"><a href="#cb35-22" tabindex="-1"></a><span class="co">#&gt;  [2,] 0.04 0.03333333 33428</span></span>
+<span id="cb35-23"><a href="#cb35-23" tabindex="-1"></a><span class="co">#&gt;  [3,] 0.06 0.03333333     0</span></span>
+<span id="cb35-24"><a href="#cb35-24" tabindex="-1"></a><span class="co">#&gt;  [4,] 0.08 0.03333333   527</span></span>
+<span id="cb35-25"><a href="#cb35-25" tabindex="-1"></a><span class="co">#&gt;  [5,] 0.10 0.03333333   592</span></span>
+<span id="cb35-26"><a href="#cb35-26" tabindex="-1"></a><span class="co">#&gt;  [6,] 0.12 0.03333333 20160</span></span>
+<span id="cb35-27"><a href="#cb35-27" tabindex="-1"></a><span class="co">#&gt;  [7,] 0.14 0.03333333 66612</span></span>
+<span id="cb35-28"><a href="#cb35-28" tabindex="-1"></a><span class="co">#&gt;  [8,] 0.16 0.03333333     0</span></span>
+<span id="cb35-29"><a href="#cb35-29" tabindex="-1"></a><span class="co">#&gt;  [9,] 0.18 0.03333333   566</span></span>
+<span id="cb35-30"><a href="#cb35-30" tabindex="-1"></a><span class="co">#&gt; [10,] 0.20 0.03333333     6</span></span></code></pre></div>
 <p>The MDgof routine <span class="math inline">\(p2d\)</span> finds the
 probabilities of rectangles defined by the grid from the distribution
 function.</p>
@@ -852,9 +861,8 @@ based on the discrete data:</p>
 <span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a>  anew</span>
 <span id="cb36-16"><a href="#cb36-16" tabindex="-1"></a>}</span>
 <span id="cb36-17"><a href="#cb36-17" tabindex="-1"></a>p<span class="ot">=</span><span class="fu">phat_disc</span>(dta_disc)</span>
-<span id="cb36-18"><a href="#cb36-18" tabindex="-1"></a><span class="co">#&gt; Error: object &#39;dta_disc&#39; not found</span></span>
-<span id="cb36-19"><a href="#cb36-19" tabindex="-1"></a>p</span>
-<span id="cb36-20"><a href="#cb36-20" tabindex="-1"></a><span class="co">#&gt; Error: object &#39;p&#39; not found</span></span></code></pre></div>
+<span id="cb36-18"><a href="#cb36-18" tabindex="-1"></a>p</span>
+<span id="cb36-19"><a href="#cb36-19" tabindex="-1"></a><span class="co">#&gt; [1] 1.083052</span></span></code></pre></div>
 <p>We want to apply this test to the original continuous data set, so we
 need to discretize it as well. This can be done with the MDgof routine
 <em>discretize</em>. Then we can run the test</p>
@@ -865,7 +873,13 @@ need to discretize it as well. This can be done with the MDgof routine
 <span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>dta_disc<span class="ot">=</span>MDgof<span class="sc">::</span><span class="fu">discretize</span>(dta_cont, <span class="at">nbins=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">30</span>))</span>
 <span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a><span class="co">#&gt; Error in MDgof::discretize(dta_cont, nbins = c(50, 30)): argument &quot;Range&quot; is missing, with no default</span></span>
 <span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a><span class="fu">head</span>(dta_disc)</span>
-<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a><span class="co">#&gt; Error: object &#39;dta_disc&#39; not found</span></span></code></pre></div>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a><span class="co">#&gt;      [,1]       [,2]  [,3]</span></span>
+<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a><span class="co">#&gt; [1,] 0.02 0.03333333 20196</span></span>
+<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a><span class="co">#&gt; [2,] 0.04 0.03333333 33428</span></span>
+<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a><span class="co">#&gt; [3,] 0.06 0.03333333     0</span></span>
+<span id="cb37-12"><a href="#cb37-12" tabindex="-1"></a><span class="co">#&gt; [4,] 0.08 0.03333333   527</span></span>
+<span id="cb37-13"><a href="#cb37-13" tabindex="-1"></a><span class="co">#&gt; [5,] 0.10 0.03333333   592</span></span>
+<span id="cb37-14"><a href="#cb37-14" tabindex="-1"></a><span class="co">#&gt; [6,] 0.12 0.03333333 20160</span></span></code></pre></div>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex6b&quot;</span>]]<span class="ot">=</span><span class="fu">gof_test</span>(dta_disc, pnull, rnull_disc, <span class="at">phat=</span>phat_disc, <span class="at">B=</span>B)</span></code></pre></div>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex6b&quot;</span>]]</span>
 <span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>

@@ -167,10 +167,24 @@ grad_mat <- function(x, f) {
     .Call(`_MDgof_grad_mat`, x, f)
 }
 
+#' R function order(x,y) for Rcpp
+#' 
+#' @param x first vector
+#' @param y second vector
+#' @return  a vector of integers
+#' @keywords  internal
 orderC <- function(x, y) {
     .Call(`_MDgof_orderC`, x, y)
 }
 
+#' Find probabilities from cdf for discrete data
+#' 
+#' @param  x matrix with data
+#' @param  cdf  function to find distribution function
+#' @param  p (possible) arguments for cdf
+#' @param  Fx (if available) already calculated values of cdf
+#' @return a matrix with probabilities added
+#' @export
 p2dC <- function(x, cdf, p, Fx = as.numeric( c(-1))) {
     .Call(`_MDgof_p2dC`, x, cdf, p, Fx)
 }

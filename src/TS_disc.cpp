@@ -23,6 +23,8 @@ Rcpp::NumericVector TS_disc(
   NumericVector TS(nummethods);
   double tmp;
   TS.names() =  methods;
+  NumericVector x1=unique(x(_,0));
+  int nx=x1.size(),ny=n/nx;
   /* some setup */
   Rcpp::Environment base("package:base");
   Rcpp::Function formals_r = base["formals"];
@@ -32,16 +34,18 @@ Rcpp::NumericVector TS_disc(
   if(respnull.size()==1) Fx = pnull(valsx);
   else Fx = pnull(valsx, param);
  /*density*/
-  NumericVector dnull=p2dC(x, pnull, param, Fx)(_,4);
+  x=p2dC(x, pnull, param, Fx);
+  NumericVector dnull=x(_,4);
   double M=0.0;
   for(i=0;i<n;++i) M=M+x(i,2);
   NumericVector ecdf(n);
-  for(i=0;i<n;++i) {
-    for(int j=0;j<n;++j) {
-      if((x(j,0)<=x(i,0)) && (x(j,1)<=x(i,1)))
-         ecdf(i)=ecdf(i)+x(j,2);
-    }  
-    ecdf(i)=ecdf(i)/M;
+  ecdf(0)=x(0,2)/M;
+  for(i=1;i<n;++i) {
+    if(i<ny) ecdf(i)=x(i,2)/M+ecdf(i-1);
+    else {
+      if(x(i,1)==x(0,1)) ecdf(i)=x(i,2)/M+ecdf(i-ny);
+      else ecdf(i)=x(i,2)/M+ecdf(i-1)+ecdf(i-ny)-ecdf(i-ny-1);
+    }
   }
   /*  Kolmogorov-Smirnov and Kuiper*/
   TS(0)=0;

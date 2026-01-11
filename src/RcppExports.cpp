@@ -226,15 +226,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // p2dC
-NumericMatrix p2dC(NumericMatrix x, Function cdf, NumericVector p, NumericVector Fx);
+Rcpp::NumericMatrix p2dC(Rcpp::NumericMatrix x, Rcpp::Function cdf, Rcpp::NumericVector p, Rcpp::NumericVector Fx);
 RcppExport SEXP _MDgof_p2dC(SEXP xSEXP, SEXP cdfSEXP, SEXP pSEXP, SEXP FxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< Function >::type cdf(cdfSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type Fx(FxSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Function >::type cdf(cdfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type Fx(FxSEXP);
     rcpp_result_gen = Rcpp::wrap(p2dC(x, cdf, p, Fx));
     return rcpp_result_gen;
 END_RCPP

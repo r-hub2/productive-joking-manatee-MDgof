@@ -223,7 +223,7 @@ rnull_disc=function(p) {
   xvals=1:nb[1]/nb[1]
   yvals=1:nb[2]/nb[2]
   z=cbind(rep(xvals, nb[2]), rep(yvals, each=nb[1]), 0)
-  prob=c(t(MDgof::p2d(z, pnull, p)))
+  prob=c(t(MDgof::p2dC(z, pnull, p)))
   z[, 3]=rbinom(prod(nb), 1e6, prob)
   z
 }
