@@ -255,7 +255,9 @@ set.seed(111)
 x=rbeta(1e6, 2, 2)
 y=rbeta(1e6, x, x)
 dta_cont=cbind(x=x, y=y)
-dta_disc=MDgof::discretize(dta_cont, nbins=c(50, 30))
+dta_disc=MDgof::discretize(dta_cont, 
+                  Range=matrix(c(0,1,0,1),2,2),
+                  nbins=c(50, 30))
 head(dta_disc)
 
 ## ----A, eval=ReRunExamples----------------------------------------------------
@@ -270,8 +272,7 @@ TSextra=list(Continuous=FALSE,
              Withpvalue=FALSE)
 
 ## ----eval=ReRunExamples-------------------------------------------------------
-# examples[["ex6c"]]=gof_test(dta_disc, pnull, rnull_disc, phat_disc,
-#          TS=newTS, TSextra=TSextra,  B=B)
+# examples[["ex6c"]]=gof_test(dta_disc, pnull, rnull_disc, phat_disc, TS=newTS, TSextra=TSextra,  B=B)
 
 ## -----------------------------------------------------------------------------
 examples[["ex6c"]]

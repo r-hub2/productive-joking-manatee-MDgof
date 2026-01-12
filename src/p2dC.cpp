@@ -36,7 +36,6 @@ Rcpp::IntegerVector orderC(Rcpp::NumericVector x, Rcpp::NumericVector y) {
   for (int i = 0; i < n; ++i) {
     res[i] = p[i] + 1; 
   }
-  
   return res;
 }
 

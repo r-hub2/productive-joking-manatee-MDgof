@@ -11,7 +11,6 @@ case.studies(
   Dim = 2,
   nsample = 250,
   nbins = c(5, 5),
-  bintype = "ES",
   ReturnCaseNames = FALSE
 )
 }
@@ -26,9 +25,7 @@ case.studies(
 
 \item{nsample}{=250, sample size.}
 
-\item{nbins}{= c(5,5), number of bins for discretized data}
-
-\item{bintype}{= "ES", ES for equal spaced bins or EP for equal probability bins.}
+\item{nbins}{=c(5,5) number of bins in x and y direction}
 
 \item{ReturnCaseNames}{=FALSE, just return names of case studies?}
 }

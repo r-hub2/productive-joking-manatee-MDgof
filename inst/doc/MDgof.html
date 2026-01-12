@@ -870,16 +870,17 @@ need to discretize it as well. This can be done with the MDgof routine
 <span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">rbeta</span>(<span class="fl">1e6</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbeta</span>(<span class="fl">1e6</span>, x, x)</span>
 <span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a>dta_cont<span class="ot">=</span><span class="fu">cbind</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)</span>
-<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>dta_disc<span class="ot">=</span>MDgof<span class="sc">::</span><span class="fu">discretize</span>(dta_cont, <span class="at">nbins=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">30</span>))</span>
-<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a><span class="co">#&gt; Error in MDgof::discretize(dta_cont, nbins = c(50, 30)): argument &quot;Range&quot; is missing, with no default</span></span>
-<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a><span class="fu">head</span>(dta_disc)</span>
-<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a><span class="co">#&gt;      [,1]       [,2]  [,3]</span></span>
-<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a><span class="co">#&gt; [1,] 0.02 0.03333333 20196</span></span>
-<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a><span class="co">#&gt; [2,] 0.04 0.03333333 33428</span></span>
-<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a><span class="co">#&gt; [3,] 0.06 0.03333333     0</span></span>
-<span id="cb37-12"><a href="#cb37-12" tabindex="-1"></a><span class="co">#&gt; [4,] 0.08 0.03333333   527</span></span>
-<span id="cb37-13"><a href="#cb37-13" tabindex="-1"></a><span class="co">#&gt; [5,] 0.10 0.03333333   592</span></span>
-<span id="cb37-14"><a href="#cb37-14" tabindex="-1"></a><span class="co">#&gt; [6,] 0.12 0.03333333 20160</span></span></code></pre></div>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>dta_disc<span class="ot">=</span>MDgof<span class="sc">::</span><span class="fu">discretize</span>(dta_cont, </span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a>                  <span class="at">Range=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>),<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>                  <span class="at">nbins=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">30</span>))</span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a><span class="fu">head</span>(dta_disc)</span>
+<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a><span class="co">#&gt;      [,1]       [,2] [,3]</span></span>
+<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a><span class="co">#&gt; [1,] 0.02 0.03333333  613</span></span>
+<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a><span class="co">#&gt; [2,] 0.04 0.03333333 1555</span></span>
+<span id="cb37-12"><a href="#cb37-12" tabindex="-1"></a><span class="co">#&gt; [3,] 0.06 0.03333333 2396</span></span>
+<span id="cb37-13"><a href="#cb37-13" tabindex="-1"></a><span class="co">#&gt; [4,] 0.08 0.03333333 3144</span></span>
+<span id="cb37-14"><a href="#cb37-14" tabindex="-1"></a><span class="co">#&gt; [5,] 0.10 0.03333333 3690</span></span>
+<span id="cb37-15"><a href="#cb37-15" tabindex="-1"></a><span class="co">#&gt; [6,] 0.12 0.03333333 4156</span></span></code></pre></div>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex6b&quot;</span>]]<span class="ot">=</span><span class="fu">gof_test</span>(dta_disc, pnull, rnull_disc, <span class="at">phat=</span>phat_disc, <span class="at">B=</span>B)</span></code></pre></div>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex6b&quot;</span>]]</span>
 <span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>
@@ -897,8 +898,7 @@ test for discrete data:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>TSextra<span class="ot">=</span><span class="fu">list</span>(<span class="at">Continuous=</span><span class="cn">FALSE</span>, </span>
 <span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>             <span class="at">WithEstimation=</span><span class="cn">TRUE</span>, </span>
 <span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a>             <span class="at">Withpvalue=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex6c&quot;</span>]]<span class="ot">=</span><span class="fu">gof_test</span>(dta_disc, pnull, rnull_disc, phat_disc, </span>
-<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>         <span class="at">TS=</span>newTS, <span class="at">TSextra=</span>TSextra,  <span class="at">B=</span>B)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex6c&quot;</span>]]<span class="ot">=</span><span class="fu">gof_test</span>(dta_disc, pnull, rnull_disc, phat_disc, <span class="at">TS=</span>newTS, <span class="at">TSextra=</span>TSextra,  <span class="at">B=</span>B)</span></code></pre></div>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex6c&quot;</span>]]</span>
 <span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>
 <span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a><span class="co">#&gt; ES33 </span></span>

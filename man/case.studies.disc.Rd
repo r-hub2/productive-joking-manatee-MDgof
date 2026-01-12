@@ -7,7 +7,6 @@
 case.studies.disc(
   which,
   WithEstimation = FALSE,
-  bintype = "ES",
   nbins = c(5, 5),
   nsample = 250
 )
@@ -16,8 +15,6 @@ case.studies.disc(
 \item{which}{name or number of desired case study.}
 
 \item{WithEstimation}{= FALSE, case study with or without parameter estimation.}
-
-\item{bintype}{= "ES", ES for equal spaced bins or EP for equal probability bins.}
 
 \item{nbins}{=c(5, 5) number of bins to use in x and y direction}
 

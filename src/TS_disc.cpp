@@ -29,13 +29,15 @@ Rcpp::NumericVector TS_disc(
   Rcpp::Environment base("package:base");
   Rcpp::Function formals_r = base["formals"];
   Rcpp::List respnull = formals_r(Rcpp::_["fun"]=pnull);
+  // find cdf values
   NumericVector Fx(n);
   NumericMatrix valsx=x(_, Range(0, 1));
   if(respnull.size()==1) Fx = pnull(valsx);
   else Fx = pnull(valsx, param);
- /*density*/
-  x=p2dC(x, pnull, param, Fx);
+  // ordering and pdf
+  x=p2dC(x, pnull, param, Fx);  
   NumericVector dnull=x(_,4);
+  // empirical distribution function
   double M=0.0;
   for(i=0;i<n;++i) M=M+x(i,2);
   NumericVector ecdf(n);
@@ -51,7 +53,7 @@ Rcpp::NumericVector TS_disc(
   TS(0)=0;
   double mx=0.0, Mx=0.0;
   for(i=0;i<n;++i) {
-    tmp = Fx[i]-ecdf(i);
+    tmp = x(i, 3)-ecdf(i);
     if(tmp<mx) mx=tmp;
     if(tmp>Mx) Mx=tmp;
   }
@@ -64,10 +66,10 @@ Rcpp::NumericVector TS_disc(
   TS(2)=0;
   TS(3)=0;
   for(i=0;i<n;++i) {
-    tmp = Fx[i]-ecdf(i);
+    tmp = x(i, 3)-ecdf(i);
     TS(2) = TS(2) + tmp*tmp*dnull(i);
-    if((Fx[i]>0) && (Fx[i]<1))
-      TS(3) = TS(3) + tmp*tmp/Fx[i]/(1-Fx[i])*dnull(i);
+    if((x(i, 3)>0) && (x(i, 3)<1))
+      TS(3) = TS(3) + tmp*tmp/x(i, 3)/(1-x(i, 3))*dnull(i);
   }
   
   /* Total Variation, Kullback-Leibler, Hellinger, Pearson*/

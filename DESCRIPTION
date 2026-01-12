@@ -1,30 +1,33 @@
 Package: MDgof
-Title: Multi-Dimensional Goodness of Fit Tests
-Version: 1.1.0
+Title: Various Methods for the Goodness-of-Fit Problem in D>1
+        Dimensions
+Version: 1.0.0
 Authors@R: 
-    person(given = "Wolfgang",
-           family = "Rolke",
-           role = c("aut", "cre"),
-           email = "wolfgang.rolke@upr.edu",
+        person("Wolfgang", "Rolke", , "wolfgang.rolke@upr.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3514-726X"))
-Description: Routines that allow the user to run a large number of goodness-of-fit tests for multi-dimesnional data.  
-     It allows for data to be continuous or discrete. It includes routines to estimate
-     the power of the tests.
-     The routine run.studies() allows a user to quickly study the power of a new method and 
-     how it compares to some of the standard ones.      
+Description: The routine gof_test() in this package runs the
+    goodness-of-fit test using various test statistic for multivariate data. 
+    Models under the null hypothesis cas either be simple or allow for parameter estimation.
+    p values are found via the parametric bootstrap (simulation). 
+    The routine gof_test_adjusted_pvalues() runs several tests and then finds a 
+    p value adjusted for simultaneous inference.
+    The routine gof_power() allows the estimation of the power of the tests. 
+    The routine run.studies() allows a user to quickly study the power of a new method and 
+    how it compares to those included in the package via a large number of case studies.
+    For details of the methods and references see the included vignettes.      
 License: GPL (>=2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 LinkingTo: Rcpp
 Imports: Rcpp, parallel, stats, microbenchmark, spatstat.geom,
-        spatstat.explore, FNN, copula, mvtnorm, ggplot2
+        spatstat.explore, FNN, copula, mvtnorm, ggplot2, microbenchmark
 Suggests: rmarkdown, knitr
 VignetteBuilder: knitr
 Depends: R (>= 3.5)
 LazyData: true
 NeedsCompilation: yes
-Packaged: 2026-01-11 14:39:39 UTC; Wolfgang
+Packaged: 2026-01-12 14:03:59 UTC; Wolfgang
 Author: Wolfgang Rolke [aut, cre] (ORCID:
     <https://orcid.org/0000-0002-3514-726X>)
 Maintainer: Wolfgang Rolke <wolfgang.rolke@upr.edu>

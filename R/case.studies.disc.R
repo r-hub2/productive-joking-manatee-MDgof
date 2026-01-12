@@ -7,13 +7,12 @@ phat.env=new.env(parent = emptyenv())
 #' 
 #' @param which name or number of desired case study.
 #' @param WithEstimation = FALSE, case study with or without parameter estimation.
-#' @param bintype = "ES", ES for equal spaced bins or EP for equal probability bins.
 #' @param nbins =c(5, 5) number of bins to use in x and y direction 
 #' @param nsample = 250, required sample size
 #' @return a list with needed stuff
 #' @export
 case.studies.disc=function(which, WithEstimation=FALSE, 
-                           bintype = "ES",  nbins=c(5, 5), nsample=250) {
+                           nbins=c(5, 5), nsample=250) {
   
   if(WithEstimation) 
      list.of.cases=MDgof::case.studies.est(ReturnCaseNames=TRUE)

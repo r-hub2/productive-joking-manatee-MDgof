@@ -7,14 +7,12 @@
 #' @param WithEstimation  =FALSE, with parameter estimation
 #' @param Dim =2 dimension of data
 #' @param nsample =250, sample size.
-#' @param nbins = c(5,5), number of bins for discretized data
-#' @param bintype = "ES", ES for equal spaced bins or EP for equal probability bins.
+#' @param nbins =c(5,5) number of bins in x and y direction
 #' @param ReturnCaseNames =FALSE, just return names of case studies?
 #' @return a list of functions
 #' @export
 case.studies=function(which, Continuous=TRUE, WithEstimation=FALSE, Dim=2,
-                      nsample=250, nbins=c(5,5), bintype = "ES",
-                      ReturnCaseNames=FALSE) {
+          nsample=250, nbins =c(5,5),  ReturnCaseNames=FALSE) {
 
   if(ReturnCaseNames) {
     if(Dim==5)
@@ -33,7 +31,7 @@ case.studies=function(which, Continuous=TRUE, WithEstimation=FALSE, Dim=2,
      return(MDgof::case.studies.est(which, nsample=nsample))
    }
    if(!Continuous) {
-     return(MDgof::case.studies.disc(which, WithEstimation, bintype,
+     return(MDgof::case.studies.disc(which, WithEstimation, 
                               nbins, nsample=nsample))
    }
   
