@@ -323,6 +323,7 @@ case.studies.cont.D5=function(which, nsample=250, ReturnCaseNames = FALSE) {
         A=matrix(c(cos(alpha), sin(alpha), -sin(alpha), cos(alpha)), 2, 2)
         x[,1:2]=x[,1:2]%*%A
         x[,3:4]=x[,3:4]%*%A
+        x
       },
       param_alt=c(0, 0.125),
       Range=Range

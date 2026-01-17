@@ -201,7 +201,7 @@ change.marginals=function(which, side, nsample=250, null_param) {
       }
       Range=matrix(c(0, 1, -Inf, Inf), 2, 2)    
   }
-  if(which=="beta-nor-1.beta-nor-stats::sd.marginal") {
+  if(which=="beta-nor-1.beta-nor-sd.marginal") {
       dens1=function(x) stats::dbeta(x, 2, 2)
       dens2=function(x, u) stats::dnorm(x, 0, u)  
       cdf2=function(x, u) stats::pnorm(x, 0, u) 
@@ -262,7 +262,7 @@ change.marginals=function(which, side, nsample=250, null_param) {
     Range=matrix(c(0.01, 0.99, -Inf, Inf), 2, 2)
   }
   if(which%in%c("beta-nor-1.beta-nor-mean.marginal",
-                "beta-nor-1.beta-nor-stats::sd.marginal",
+                "beta-nor-1.beta-nor-sd.marginal",
                 "beta-beta-2.beta-beta-a.marginal",
                 "beta05.normal.marginal")) 
     return(list(cdf2=cdf2, dens1=dens1, dens2=dens2,

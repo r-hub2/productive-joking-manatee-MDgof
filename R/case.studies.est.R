@@ -23,11 +23,11 @@ case.studies.est=function(which, nsample=250, ReturnCaseNames = FALSE) {
           "Joe.marginal.truncexp.marginal",
           "Clayton.marginal.betaa1.marginal",
           "beta22.normal-mean.marginal",
-          "beta22.normal-stats::sd.marginal",
+          "beta22.normal-sd.marginal",
           "beta22.lognormal-mean.marginal",
-          "beta22.lognormal-stats::sd.marginal",
+          "beta22.lognormal-sd.marginal",
           "beta22.exponential.marginal",
-          "exp1.normal-stats::sd.marginal",
+          "exp1.normal-sd.marginal",
           "beta05.gamma.marginal"
           )
   if (ReturnCaseNames) return(cases)
@@ -97,7 +97,7 @@ case.studies.est=function(which, nsample=250, ReturnCaseNames = FALSE) {
     ))
   }
 
-# Same Copula with different parameters
+# Same Copula with different parameters, or added stripe
   a=strsplit(which, "\\.")[[1]]
   if(length(a==2) & a[1]==a[2]) {
     family=strsplit(which, "\\.")[[1]][1]
@@ -136,7 +136,9 @@ case.studies.est=function(which, nsample=250, ReturnCaseNames = FALSE) {
         },        
         phat=function(x) {
            cop0=gen.cop(family, p[1])
-           copula::fitCopula(cop0, copula::pobs(x))@estimate
+           tryCatch(copula::fitCopula(cop0, copula::pobs(x))@estimate,
+                    error=function(e) p[1]
+                    )
         },
         param_alt=p, Range=Range
       ))
@@ -368,7 +370,7 @@ case.studies.est=function(which, nsample=250, ReturnCaseNames = FALSE) {
       phat=function(x) sum(x[,2]/x[,1]^2)/sum(1/x[,1]^2)
       Range=matrix(c(0, 1, -Inf, Inf), 2, 2)
     }
-    if(a[[1]]=="beta22" & a[[2]]=="normal-stats::sd") {
+    if(a[[1]]=="beta22" & a[[2]]=="normal-sd") {
       pr=c(2, 1, 3)
       dens2=function(x, u, p=pr[1]) stats::dnorm(x, u, p)  
       cdf2=function(x, u, p=pr[1]) stats::pnorm(x, u, p) 
@@ -387,7 +389,7 @@ case.studies.est=function(which, nsample=250, ReturnCaseNames = FALSE) {
       phat=function(x) sum(log(x[,2])/h(x[,1])^2)/sum(1/h(x[,1])^2)
       Range=matrix(c(0, 1, 0, Inf), 2, 2)
     }
-    if(a[[1]]=="beta22" & a[[2]]=="lognormal-stats::sd") {
+    if(a[[1]]=="beta22" & a[[2]]=="lognormal-sd") {
       pr=c(2, 1, 3)
       h=function(x) (x+1)/100
       dens2=function(x, u, p=pr[1]) stats::dnorm(log(x), h(u), p)/x  
@@ -407,7 +409,7 @@ case.studies.est=function(which, nsample=250, ReturnCaseNames = FALSE) {
       phat=function(x) 1/mean(h(x[,1])*x[,2])
       Range=matrix(c(0, 1, 0, Inf), 2, 2)
     }  
-    if(a[[1]]=="exp1" & a[[2]]=="normal-stats::sd") {
+    if(a[[1]]=="exp1" & a[[2]]=="normal-sd") {
       pr=c(1, 1, 3)
       h=function(x) x+1
       dens1=function(x) stats::dexp(x, pr[1])/stats::pexp(1, pr[1])

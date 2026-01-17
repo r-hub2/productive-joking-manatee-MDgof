@@ -1,8 +1,8 @@
 ---
-title: "Case Studies"
+title: "MDgof-Case-Studies"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Case Studies}
+  %\VignetteIndexEntry{MDgof-Case-Studies}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

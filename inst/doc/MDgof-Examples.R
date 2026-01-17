@@ -9,17 +9,21 @@ library(MDgof)
 B=200 
 st=function() knitr::knit_exit()
 examples=MDgof::examples.mdgof.vignette
+
+## -----------------------------------------------------------------------------
 ReRunExamples=FALSE
 
 ## -----------------------------------------------------------------------------
 set.seed(123)
 
 ## ----ex1----------------------------------------------------------------------
-pnull=function(x) {
+# cumulative distribution function under the null hypothesis
+pnull=function(x) { 
   f=function(x) mvtnorm::pmvnorm(rep(-Inf, length(x)), x)
   if(!is.matrix(x)) return(f(x))
   apply(x, 1, f)
 }
+# function that generates data under the null hypothesis
 rnull=function() mvtnorm::rmvnorm(100, c(0, 0))
 x=rnull()
 
@@ -44,15 +48,19 @@ examples[["ex1b"]]
 
 ## ----ex2----------------------------------------------------------------------
 pnull=function(x, p) {
-  f=function(x) mvtnorm::pmvnorm(rep(-Inf, length(x)), x, mean=p[1:2],  sigma=matrix(c(p[3], p[5], p[5], p[4]), 2, 2))
+  f=function(x) mvtnorm::pmvnorm(rep(-Inf, length(x)), 
+      x, mean=p[1:2],  
+      sigma=matrix(c(p[3], p[5], p[5], p[4]), 2, 2))
   if(!is.matrix(x)) return(f(x))
   apply(x, 1, f)
 }
-rnull=function(p) mvtnorm::rmvnorm(200, mean=p[1:2],
-                        sigma=matrix(c(p[3], p[5], p[5], p[4]), 2, 2))
+rnull=function(p) mvtnorm::rmvnorm(200, 
+      mean=p[1:2],
+      sigma=matrix(c(p[3], p[5], p[5], p[4]), 2, 2))
 dnull=function(x, p) {
-  f=function(x) mvtnorm::dmvnorm(x, mean=p[1:2],
-                          sigma=matrix(c(p[3], p[5], p[5], p[4]), 2, 2))
+  f=function(x) mvtnorm::dmvnorm(x, 
+      mean=p[1:2],
+      sigma=matrix(c(p[3], p[5], p[5], p[4]), 2, 2))
   if(!is.matrix(x)) return(f(x))
   apply(x, 1, f)
 }
@@ -157,6 +165,7 @@ rnull=function() {
    MDgof::sq2rec(table(x, y))
 }
 x=rnull()
+x
 
 ## ----eval=ReRunExamples-------------------------------------------------------
 # examples[["ex5"]]=gof_test(x, pnull, rnull, B=B)
@@ -350,5 +359,6 @@ TSextra=list(Continuous=TRUE,
 #             alpha=0.1, nsample=500, B=B)
 
 ## -----------------------------------------------------------------------------
-examples[["ex8"]]
+examples[["ex8"]][["Null"]][1:2, ]
+examples[["ex8"]][["Pow"]][1:2, ]
 

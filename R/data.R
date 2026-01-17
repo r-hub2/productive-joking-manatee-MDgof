@@ -39,3 +39,10 @@
 #' @format ## 'examples.mdgof.vignette'
 #' A list
 "examples.mdgof.vignette"
+
+#' hybrid.mdgof.vignette
+#' 
+#' stuff needed to run vignette MDgof::hybrid fast enough to pass CRAN 
+#' @format ## 'hybrid.mdgof.vignette'
+#' A list
+"hybrid.mdgof.vignette"

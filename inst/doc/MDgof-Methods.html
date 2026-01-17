@@ -264,7 +264,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <p>In the following discussion <span class="math inline">\(F(\mathbf{x})\)</span> will denote the cumulative
 distribution function and <span class="math inline">\(\hat{F}(\mathbf{x})\)</span> the empirical
-distribution function of a random vector <span class="math inline">\(\mathbf{X}\)</span>.</p>
+distribution function of a random vector <span class="math inline">\(\mathbf{x}\)</span>.</p>
 <p>Except for the chi-square tests none of the tests included in the
 package has a large sample theory that would allow for finding p values,
 and so for all of them simulation is used.</p>
@@ -289,8 +289,13 @@ true tests. They are</p>
 used goodness-of-fit tests. It is based on</p>
 <p><span class="math display">\[\psi(F,\hat{F})=\max\left\{\vert
 F(\mathbf{x})-\hat{F}(\mathbf{x}\vert:\mathbf{x} \in
-\mathbf{R^d}\right\}\]</span> The test implemented in <em>MDgof</em>
-uses</p>
+\mathbf{R^d}\right\}\]</span> In one dimension the maximum always occurs
+at one of the data points <span class="math inline">\(\{x_1,..,x_n\}\)</span>. In d dimensions however
+the maximum can occur at any point whose coordinates is any combination
+of any of the coordinates of the points in the data set, and there are
+<span class="math inline">\(n^d\)</span> of those.</p>
+<p>Instead the test implemented in <em>MDgof</em> finds the maximum
+again just at the data points:</p>
 <p><span class="math display">\[TS=\max\left\{\vert
 F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i\vert\right\}\]</span> The KS test
 was first proposed in <span class="citation">(Kolmogorov 1933)</span>

@@ -19,7 +19,7 @@ knitr::opts_chunk$set(error=TRUE,
 library(MDgof)
 ```
 
-In the following discussion $F(\mathbf{x})$ will denote the cumulative distribution function and $\hat{F}(\mathbf{x})$ the empirical distribution function of a random vector $\mathbf{X}$.
+In the following discussion $F(\mathbf{x})$ will denote the cumulative distribution function and $\hat{F}(\mathbf{x})$ the empirical distribution function of a random vector $\mathbf{x}$.
 
 Except for the chi-square tests none of the tests included in the package has a large sample theory that would allow for finding p values, and so for all of them simulation is used. 
 
@@ -34,7 +34,9 @@ A number of classical tests are based on a test statistic of the form $\psi(F,\h
 The Kolmogorov-Smirnov test is one of the best known and most widely used goodness-of-fit tests. It is based on
 
 $$\psi(F,\hat{F})=\max\left\{\vert F(\mathbf{x})-\hat{F}(\mathbf{x}\vert:\mathbf{x} \in \mathbf{R^d}\right\}$$
-The test implemented in *MDgof* uses
+In one dimension the maximum always occurs at one of the data points $\{x_1,..,x_n\}$. In d dimensions however the maximum can occur at any point whose coordinates is any combination of any of the coordinates of the points in the data set, and there are $n^d$ of those. 
+
+Instead the test implemented in *MDgof* finds the maximum again just at the data points: 
 
 $$TS=\max\left\{\vert F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i\vert\right\}$$
 The KS test was first proposed in [@Kolmogorov1933] and [@Smirnov1939]. We use the notation *qKS* (quick Kolmogorov-Smirnov) to distinguish the test implemented in *MDgof* from the full test. 

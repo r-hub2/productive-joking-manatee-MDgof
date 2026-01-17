@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MDgof-hybrid</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">MDgof-hybrid</h1>
+
+
+
+<p><strong>Note</strong> the examples are not actually run but their
+results are stored in the included data set
+<em>hybrid.mdgof.vignette</em>. This is done to satisfy CRAN submission
+rules regarding the execution time of vignettes. If you want to run the
+Rmarkdown file yourself, set ReRunExamples=TRUE.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>ReRunExamples<span class="ot">=</span><span class="cn">FALSE</span></span></code></pre></div>
+<p>In a standard goodness-of-fit problem we have a data set <span class="math inline">\(x\)</span> and a probability model, given in form
+of the cumulative distribution function <span class="math inline">\(F\)</span>, and want to test <span class="math inline">\(H_0: X\sim F\)</span>, that is the data set was
+generated by <span class="math inline">\(F\)</span>.</p>
+<p>There are however circumstances where evaluation of the function
+<span class="math inline">\(F(x)\)</span> is difficult or even
+impossible, especially for high-dimensional data. It is however possible
+to generate data from <span class="math inline">\(F\)</span>. Then a
+test can be run as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Generate a Monte Carlo data set <span class="math inline">\(y\)</span> from <span class="math inline">\(F\)</span>.<br />
+</li>
+<li>Run a two-sample test n <span class="math inline">\(x\)</span> and
+<span class="math inline">\(y\)</span>.</li>
+</ol>
+<p>In what follows we will call this a hybrid test.</p>
+<p>One additional “feature” of this approach is that often we are free
+to choose the sample size of <span class="math inline">\(y\)</span>.
+Generally on would expect the power of the tests to increase.</p>
+<p>The companion R package <em>MD2sample</em> has a large number of
+methods already implemented and is used in routines that follow.</p>
+<div id="example-1-continuous-data-without-parameter-estimation" class="section level2">
+<h2>Example 1: Continuous data without parameter estimation</h2>
+<p>We generate a two-dimensional data set of size 100 from a
+multivariate standard normal distribution and run the test with the null
+hypothesis <span class="math inline">\(H_0:X\sim N(\mathbf{0},
+\mathbf{I_2})\)</span>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>rnull<span class="ot">=</span><span class="cf">function</span>() mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(<span class="dv">100</span>, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">rnull</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex1a&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_test</span>(x, rnull, <span class="at">B=</span>B)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex1a&quot;</span>]]</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt;      KS       K     CvM      AD     NN1     NN5      AZ      BF      BG </span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt;  0.1100  0.1700  0.1047  0.7069  0.8800  1.7300 -0.0070  0.2167  0.1383 </span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; $p.values</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt;    KS     K   CvM    AD   NN1   NN5    AZ    BF    BG </span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; 0.770 0.890 0.540 0.635 0.905 0.985 0.885 0.780 0.725</span></span></code></pre></div>
+<p><span class="math inline">\(B\)</span> is the number of simulation
+runs to estimated the p-value, <span class="math inline">\(B=5000\)</span> is the default but if the data set
+is large a smaller value should suffice.</p>
+<p><strong>Arguments of hybrid_test for continuous data</strong></p>
+<ul>
+<li><em>x</em> a matrix of numbers with different observations in
+different rows (for continuous data).<br />
+</li>
+<li><em>rnull</em> routine that generates data under the null
+hypothesis.<br />
+</li>
+<li><em>phat</em> routine that finds parameter estimates.<br />
+</li>
+<li><em>TS</em> a routine to calculate test statistics or p values for
+new tests.<br />
+</li>
+<li><em>TSextra</em> additional info passed to TS, if necessary.<br />
+</li>
+<li><em>maxProcessor</em> maximum number of cores to use. If set to 1 no
+parallel processing is used.<br />
+</li>
+<li><em>doMethods=“all”</em> names of method to include.<br />
+</li>
+<li><em>B=5000</em> number of simulation runs.</li>
+</ul>
+</div>
+<div id="example-2-continuous-data-with-parameter-estimation" class="section level2">
+<h2>Example 2: Continuous data with parameter estimation</h2>
+<p>In this example we will test whether the data comes from bivariate
+normal distribution, with means and variance-covariance estimated from
+the data.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>rnull<span class="ot">=</span><span class="cf">function</span>(p) mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(<span class="dv">200</span>, </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>      <span class="at">mean=</span>p[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>      <span class="at">sigma=</span><span class="fu">matrix</span>(<span class="fu">c</span>(p[<span class="dv">3</span>], p[<span class="dv">5</span>], p[<span class="dv">5</span>], p[<span class="dv">4</span>]), <span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>phat<span class="ot">=</span><span class="cf">function</span>(x) </span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>   <span class="fu">c</span>(<span class="fu">apply</span>(x, <span class="dv">2</span>, mean), <span class="fu">c</span>(<span class="fu">apply</span>(x, <span class="dv">2</span>, var), <span class="fu">cov</span>(x[,<span class="dv">1</span>],x[,<span class="dv">2</span>])))</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">rnull</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>,<span class="fl">0.6</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="fu">phat</span>(x)</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; [1] 1.2812099 1.8038581 3.9441709 8.0894505 0.1389893</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex2a&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_test</span>(x, rnull, phat, <span class="at">B=</span>B)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex2a&quot;</span>]]</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt;        KS         K       CvM        AD       NN1       NN5        AZ        BF </span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt;  0.110000  0.120000  0.263900  1.987300  0.955000  1.930000 -0.001000  0.297600 </span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt;        BG </span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt;  0.008009 </span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt; $p.values</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt;    KS     K   CvM    AD   NN1   NN5    AZ    BF    BG </span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; 0.320 0.940 0.120 0.070 0.750 0.745 0.485 0.245 0.890</span></span></code></pre></div>
+<p>In contrast in the next case we will generate data from a
+multivariate t distribution with 5 degrees of freedom. We also use a
+larger sample size.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>y<span class="ot">=</span>mvtnorm<span class="sc">::</span><span class="fu">rmvt</span>(<span class="dv">300</span>, <span class="at">sigma=</span><span class="fu">diag</span>(<span class="dv">2</span>), <span class="at">df=</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex2b&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_test</span>(y, rnull, phat, <span class="at">B=</span>B)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex2b&quot;</span>]]</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt;       KS        K      CvM       AD      NN1      NN5       AZ       BF </span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt; 0.080000 0.153300 0.092860 0.764500 0.950000 1.973300 0.003255 0.289100 </span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt;       BG </span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; 0.334200 </span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt; $p.values</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt;    KS     K   CvM    AD   NN1   NN5    AZ    BF    BG </span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">#&gt; 0.705 0.425 0.610 0.605 0.800 0.620 0.885 0.290 0.370</span></span></code></pre></div>
+</div>
+<div id="new-tests" class="section level2">
+<h2>New Tests</h2>
+<p><em>hybrid_test</em> allows the user to supply their own (two-sample)
+test method, either one that finds its own p-value or a method that
+requires simulation.</p>
+<p>The routine <em>chiTS.cont</em> (included in the <em>MD2sample</em>
+package) finds either the test statistic or the p value of a chi square
+test in two dimensions. First we need to set</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>TSextra<span class="ot">=</span><span class="fu">list</span>(<span class="at">which=</span><span class="st">&quot;statistic&quot;</span>, <span class="at">nbins=</span><span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)))</span></code></pre></div>
+<p>this list is passed to <em>chiTS.cont</em> and tells the routine
+to</p>
+<ul>
+<li>return the test statistic (and not the p value)<br />
+</li>
+<li>Run two tests, first with 3 and 3 bins in the x and y direction and
+then 3 and 4 bins.</li>
+</ul>
+</div>
+<div id="example-3" class="section level2">
+<h2>Example 3</h2>
+<p>In this example we use the same setup as in example 2.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex3a&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_test</span>(x, rnull, phat, </span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>         <span class="at">TS=</span>MD2sample<span class="sc">::</span>chiTS.cont, <span class="at">TSextra=</span>TSextra,  </span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>         <span class="at">B=</span>B)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex3a&quot;</span>]]</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt; Chisq Stat 3,3 Chisq Stat 3,4 </span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt;         5.1979         6.8728 </span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt; $p.values</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; Chisq Stat 3,3 Chisq Stat 3,4 </span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt;          0.700          0.775</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex3b&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_test</span>(y, rnull, phat, </span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>         <span class="at">TS=</span>MD2sample<span class="sc">::</span>chiTS.cont, <span class="at">TSextra=</span>TSextra,  </span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>         <span class="at">B=</span>B)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex3b&quot;</span>]]</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co">#&gt; Chisq Stat 3,3 Chisq Stat 3,4 </span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co">#&gt;         11.449         19.757 </span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">#&gt; $p.values</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">#&gt; Chisq Stat 3,3 Chisq Stat 3,4 </span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">#&gt;           0.18           0.07</span></span></code></pre></div>
+<p><strong>Arguments and output of new test routine for continuous
+data</strong></p>
+<p>see the vignette <em>MD2sample</em>.</p>
+<div id="power-estimation" class="section level3">
+<h3>Power Estimation</h3>
+<p>The routine <strong>hybrid_power</strong> allows the user to estimate
+the power of the tests via two-sample methods.</p>
+</div>
+<div id="example-4" class="section level3">
+<h3>Example 4</h3>
+<p>Let’s say we want to estimate the power when the null hypothesis
+specifies a standard bivariate normal distribution, but the data
+actually comes from a bivariate normal distribution with mean vector
+<span class="math inline">\((0,0)\)</span>, variances equal to 1 and a
+covariance <span class="math inline">\(\rho\)</span>. We first need a
+function that generates these data sets:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>rnull<span class="ot">=</span><span class="cf">function</span>() mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(<span class="dv">100</span>, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>ralt<span class="ot">=</span><span class="cf">function</span>(s) mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(<span class="dv">100</span>, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>                <span class="at">sigma=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, s, s, <span class="dv">1</span>), <span class="dv">2</span>, <span class="dv">2</span>))</span></code></pre></div>
+<p>Now we can run</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex4a&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_power</span>(rnull, ralt, </span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.8</span>), <span class="at">B=</span>B, <span class="at">maxProcessor=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex4a&quot;</span>]]</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co">#&gt;        KS     K  CvM    AD  NN1  NN5    AZ   BF    BG    FR NN0   CF1  CF2</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">#&gt; 0   0.105 0.065 0.09 0.125 0.05 0.06 0.085 0.05 0.065 0.045   1 0.045 0.08</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co">#&gt; 0.8 0.560 0.705 0.63 0.700 0.76 0.95 0.985 0.95 0.065 0.865   1 0.865 0.70</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">#&gt;       CF3   CF4  Ball    ES    EP</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co">#&gt; 0   0.045 0.085 0.065 0.065 0.035</span></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">#&gt; 0.8 0.865 0.800 0.350 0.960 0.995</span></span></code></pre></div>
+<p><strong>Arguments of hybrid_power</strong></p>
+<ul>
+<li><em>rnull</em> routine that generates data under the null
+hypothesis.<br />
+</li>
+<li><em>ralt</em> routine that generates data under the alternative
+hypothesis.<br />
+</li>
+<li><em>param_alt</em> vector of parameter values passed to ralt.<br />
+</li>
+<li><em>phat</em> routine that finds parameter estimates.<br />
+</li>
+<li><em>TS</em> a routine to calculate test statistics or p values for
+new tests.<br />
+</li>
+<li><em>TSextra</em> additional info passed to TS, if necessary.<br />
+</li>
+<li><em>With.p.value=FALSE</em> does user supplied routine return p
+values?</li>
+<li><em>alpha=0.05</em> desired type I error probability.<br />
+</li>
+<li><em>maxProcessor</em> maximum number of cores to use. If set to 1 no
+parallel processing is used.<br />
+</li>
+<li><em>B=1000</em> number of simulation runs.</li>
+</ul>
+<p>Again the user can provide their own routine:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>TSextra<span class="ot">=</span><span class="fu">list</span>(<span class="at">which=</span><span class="st">&quot;pvalue&quot;</span>, <span class="at">nbins=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex4b&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_power</span>(rnull, ralt, <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.8</span>), <span class="at">TS=</span>MD2sample<span class="sc">::</span>chiTS.cont, </span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>          <span class="at">TSextra=</span>TSextra, <span class="at">B=</span><span class="dv">500</span>, </span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>          <span class="at">With.p.value=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex4b&quot;</span>]]</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co">#&gt;     Chisq Pval 3,4</span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">#&gt; 0            0.062</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#&gt; 0.8          0.992</span></span></code></pre></div>
+</div>
+</div>
+<div id="discrete-data" class="section level2">
+<h2>Discrete Data</h2>
+<div id="example-5" class="section level3">
+<h3>Example 5</h3>
+<p>We consider the case of data from binomial distributions:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>rnull<span class="ot">=</span><span class="cf">function</span>() {</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>   x<span class="ot">=</span><span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>   y<span class="ot">=</span><span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">3</span>, <span class="fl">0.5</span><span class="sc">+</span>x<span class="sc">/</span><span class="dv">20</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>   MDgof<span class="sc">::</span><span class="fu">sq2rec</span>(<span class="fu">table</span>(x, y))</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>}</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">rnull</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex5&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_test</span>(x, rnull, <span class="at">B=</span>B)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex5&quot;</span>]]</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co">#&gt;     KS      K    CvM     AD     NN     AZ     BF </span></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co">#&gt; 0.0500 0.0790 0.1998 1.3240 4.4895 0.0681 0.1053 </span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co">#&gt; $p.values</span></span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co">#&gt;    KS     K   CvM    AD    NN    AZ    BF </span></span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co">#&gt; 0.110 0.020 0.340 0.265 0.195 0.100 0.100</span></span></code></pre></div>
+<p>The MDgof routine <em>sq2rec</em> above changes the format of the
+data from that output by the table command to what is required by
+<em>hybrid_test</em>.</p>
+<p>The arguments of hybrid_test for discrete data are the same as those
+for continuous data. The routines determine that the data is discrete if
+<em>x</em> is a matrix with three columns and the the values in the
+third column are integers.</p>
+</div>
+<div id="user-supplied-tests" class="section level3">
+<h3>User supplied tests</h3>
+<p>The routine <em>chiTS.disc</em> (included in the <em>MD2sample</em>
+package) does a chi-square test for discrete data:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>TSextra<span class="ot">=</span><span class="fu">list</span>(<span class="at">which=</span><span class="st">&quot;statistic&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex6c&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_test</span>(x, rnull,  <span class="at">TS=</span>MD2sample<span class="sc">::</span>chiTS.disc, <span class="at">TSextra=</span>TSextra,  <span class="at">B=</span>B)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex6c&quot;</span>]]</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="co">#&gt; $statistics</span></span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="co">#&gt; Chisq Stat </span></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="co">#&gt;     16.942 </span></span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="co">#&gt; $p.values</span></span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a><span class="co">#&gt; Chisq Stat </span></span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a><span class="co">#&gt;      0.795</span></span></code></pre></div>
+</div>
+<div id="power-estimation-1" class="section level3">
+<h3>Power Estimation</h3>
+<p>Power estimation for discrete data is done the same way as for
+continuous data:</p>
+</div>
+<div id="example-7" class="section level3">
+<h3>Example 7</h3>
+<p>We consider again the case of data from binomial distributions as in
+example 5. As an alternative we change the distribution of Y.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>rnull<span class="ot">=</span><span class="cf">function</span>() {</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>   x<span class="ot">=</span><span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>   y<span class="ot">=</span><span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">3</span>, <span class="fl">0.5</span><span class="sc">+</span>x<span class="sc">/</span><span class="dv">20</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>   MDgof<span class="sc">::</span><span class="fu">sq2rec</span>(<span class="fu">table</span>(x, y))</span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>}</span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>ralt<span class="ot">=</span><span class="cf">function</span>(p) {</span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>   x<span class="ot">=</span><span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">5</span>, p)</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>   y<span class="ot">=</span><span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">3</span>, <span class="fl">0.5</span><span class="sc">+</span>x<span class="sc">/</span><span class="dv">20</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>   MDgof<span class="sc">::</span><span class="fu">sq2rec</span>(<span class="fu">table</span>(x, y))</span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>}</span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">ralt</span>(<span class="fl">0.475</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex7b&quot;</span>]]<span class="ot">=</span> <span class="fu">hybrid_power</span>(rnull, ralt, <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.475</span>), <span class="at">B=</span><span class="dv">200</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex7b&quot;</span>]]</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="co">#&gt;         KS     K   CvM    AD   NN    AZ    BF Chisquare</span></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="co">#&gt; 0.5   0.07 0.075 0.035 0.040 0.04 0.030 0.040     0.055</span></span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co">#&gt; 0.475 0.50 0.225 0.525 0.595 0.13 0.675 0.675     0.240</span></span></code></pre></div>
+<p>or using a user-supplied test that find a p value:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>TSextra<span class="ot">=</span><span class="fu">list</span>(<span class="at">which=</span><span class="st">&quot;pvalue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex7d&quot;</span>]]<span class="ot">=</span><span class="fu">hybrid_power</span>(rnull, ralt, <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.475</span>), <span class="at">TS=</span>MD2sample<span class="sc">::</span>chiTS.disc, <span class="at">TSextra=</span>TSextra,  </span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>         <span class="at">With.p.value =</span> <span class="cn">TRUE</span>, <span class="at">B=</span>B)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>examples[[<span class="st">&quot;ex7d&quot;</span>]]</span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="co">#&gt;       Chisq P</span></span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a><span class="co">#&gt; 0.5     0.025</span></span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a><span class="co">#&gt; 0.475   0.205</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="fu">saveRDS</span>(examples, <span class="st">&quot;hybrid.mdgof.vignette.rds&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

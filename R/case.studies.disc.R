@@ -29,20 +29,20 @@ case.studies.disc=function(which, WithEstimation=FALSE,
                   param_alt=tmp$param_alt))
   }
   else {
-     tmp=MDgof::case.studies.est(which, nsample=nsample)
+     tmp1=MDgof::case.studies.est(which, nsample=nsample)
      rnull2=function(p) {
-       x=tmp$rnull(p)
-       phat.env$phat=tmp$phat(x)
-       MDgof::discretize(x, tmp$Range, nbins=nbins)
+       x=tmp1$rnull(p)
+       phat.env$phat=tmp1$phat(x)
+       MDgof::discretize(x, tmp1$Range, nbins=nbins)
      } 
      ralt=function(p) {
-       x=tmp$ralt(p)
-       phat.env$phat=tmp$phat(x)
-       MDgof::discretize(x, tmp$Range, nbins=nbins)
+       x=tmp1$ralt(p)
+       phat.env$phat=tmp1$phat(x)
+       MDgof::discretize(x, tmp1$Range, nbins=nbins)
      } 
      phat=function(x) return(phat.env$phat)
-     return(list(pnull=tmp$pnull, rnull=rnull2, ralt=ralt,
-                 phat=phat, param_alt=tmp$param_alt))
+     return(list(pnull=tmp1$pnull, rnull=rnull2, ralt=ralt,
+                 phat=phat, param_alt=tmp1$param_alt))
   }
   
 }

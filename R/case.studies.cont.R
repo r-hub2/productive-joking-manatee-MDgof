@@ -19,7 +19,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
           "uniform.rotate.marginal", "uniform.beta-one.marginal",
           "uniform.beta-two.marginal", "uni-exp-1.uni-exp-l.marginal",
           "exp-exp-1.exp-exp-l.marginal","beta-nor-1.beta-nor-mean.marginal",
-          "beta-nor-1.beta-nor-stats::sd.marginal",
+          "beta-nor-1.beta-nor-sd.marginal",
           "beta-beta-2.beta-beta-a.marginal",
           "beta05.normal.marginal"
           )
@@ -383,7 +383,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
   }
 # 27-30:  
   if(which%in% c("beta-nor-1.beta-nor-mean.marginal",
-                 "beta-nor-1.beta-nor-stats::sd.marginal",
+                 "beta-nor-1.beta-nor-sd.marginal",
                  "beta-beta-2.beta-beta-a.marginal",
                  "beta05.normal.marginal")) {
     tmp=change.marginals(which, 0, nsample, null_param)
@@ -391,7 +391,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
       pr=c(2, 3.25)
       Ra=matrix(c(0,1,-Inf, Inf),2,2)
     }
-    if(which=="beta-nor-1.beta-nor-stats::sd.marginal") {
+    if(which=="beta-nor-1.beta-nor-sd.marginal") {
       pr=c(2, 3.25)
       Ra=matrix(c(0,1,-Inf, Inf),2,2)
     }
