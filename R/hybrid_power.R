@@ -20,39 +20,18 @@
 #' @return A list with vectors of test statistics and p.values
 #' @examples
 #' # All examples are run with B=20 and maxProcessor=1 to pass CRAN checks.
-#' # Tests to see whether data comes from a bivariate standard normal distribution, 
+#' # Power of tests see whether data comes from a bivariate standard normal distribution, 
 #' # without parameter estimation. True Distribution is bivariate normal with
 #' # correlation r.
 #' rnull=function() mvtnorm::rmvnorm(100, c(0, 0))
 #' ralt=function(r) mvtnorm::rmvnorm(100, sigma=matrix(c(1,r,r,1),2,2))
 #' hybrid_power(rnull, ralt, 0.3, B=20, maxProcessor = 1)
-#' # Tests to see whether data comes from a standard normal distribution, 
+#' # Power of tests to see whether data comes from a standard normal distribution, 
 #' # with mean parameter estimated. True data comes from t distribution.
 #' rnull=function(p) mvtnorm::rmvnorm(100, p)
 #' ralt=function(df) mvtnorm::rmvt(100, df=df)
 #' phat=function(x) apply(x, 2, mean)  
 #' hybrid_power(rnull, ralt, 5, phat, B=20, maxProcessor = 1)
-#' # Example of a discrete model, with parameter estimation
-#' # Under H0: X~Bin(10, p1), Y|X=x~Bin(5, p2)
-#' # Under H1: X~Bin(10, 0.5), Y|X=x~Bin(5, 0.4+x/100)
-#' rnull=function(p) {
-#'   x=rbinom(1000, 10, p[1])
-#'   y=rbinom(1000, 5, p[2])
-#'   MDgof::sq2rec(table(x, y))
-#' }
-#' ralt=function(a) {
-#'   x=rbinom(10000, 10, 0.5)
-#'   y=rbinom(10000, 5, 0.4+a*x/100)
-#'   MDgof::sq2rec(table(x, y))
-#' }
-#' phat=function(x) {
-#'   tx=tapply(x[,3], x[,1], sum)
-#'   p1=mean(rep(as.numeric(names(tx)), times=tx))/10
-#'   ty=tapply(x[,3], x[,2], sum)
-#'   p2=mean(rep(as.numeric(names(ty)), times=ty))/5
-#'   c(p1, p2)
-#' }
-#' hybrid_power(rnull, ralt, c(0,1.5), phat, B=20, maxProcessor = 1)
 #' @export
 hybrid_power=function(rnull, ralt, param_alt, phat=function(x) -99, 
                     nMC=1, TS, TSextra, With.p.value=FALSE,

@@ -58,20 +58,27 @@ rnull=function(p) mvtnorm::rmvnorm(100, p)
 phat=function(x) apply(x, 2, mean)  
 x=rnull(c(0,1))
 hybrid_test(x, rnull, phat, B=20, maxProcessor = 1)
+# Example of a discrete model, without parameter estimation
+# X~Bin(5, 0.5), Y|X=x~Bin(4, 0.5+x/100)
+rnull=function() {
+  x=rbinom(1000, 5, 0.5)
+  y=rbinom(1000, 4, 0.5)
+  MDgof::sq2rec(table(x, y))
+}
+x=rnull()
+hybrid_test(x, rnull, B=50, maxProcessor = 1)
 # Example of a discrete model, with parameter estimation
-# X~Bin(10, p1), Y|X=x~Bin(5, p2+x/100)
+# X~Bin(5, p), Y|X=x~Bin(4, 0.5+x/100)
 rnull=function(p) {
-  x=rbinom(10000, 10, p[1])
-  y=rbinom(10000, 5, p[2]+x/100)
+  x=rbinom(1000, 5, p)
+  y=rbinom(1000, 4, 0.5+x/100)
   MDgof::sq2rec(table(x, y))
 }
 phat=function(x) {
   tx=tapply(x[,3], x[,1], sum)
-  p1=mean(rep(as.numeric(names(tx)), times=tx))/10
-  ty=tapply(x[,3], x[,2], sum)
-  p2=mean(rep(as.numeric(names(ty)), times=ty))/5-p1/10
-  c(p1, p2)
+  p1=mean(rep(as.numeric(names(tx)), times=tx))/5
+  p1
 }
-x=rnull(c(0.5, 0.5))
+x=rnull(0.5)
 hybrid_test(x, rnull, phat, B=20, maxProcessor = 1)
 }

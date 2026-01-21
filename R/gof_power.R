@@ -23,7 +23,8 @@
 #' @param  B =1000 number of simulation runs
 #' @return A numeric matrix of power values.
 #' @examples
-#' # All examples are run with B=5 and maxProcessor=1 to pass CRAN checks.
+#' # All examples are run with B=10 and maxProcessor=1 to pass CRAN checks.
+#' # This is obviously MUCH TO SMALL for any real usage.
 #' # Power of tests if null hypothesis specifies a bivariate standard normal 
 #' # distribution but data comes from a bivariate normal with different means, 
 #' # without parameter estimation.
@@ -33,13 +34,13 @@
 #'   if(!is.matrix(x)) return(mvtnorm::pmvnorm(rep(-Inf, 2), x))
 #'   apply(x, 1, function(x) mvtnorm::pmvnorm(rep(-Inf, 2), x))
 #' }
-#' gof_power(pnull, rnull, ralt, c(0, 1), B=5, maxProcessor = 1)
+#' gof_power(pnull, rnull, ralt, c(0, 1), B=10, maxProcessor = 1)
 #' # Same as above, but now with density included
 #' dnull=function(x) {
 #'   if(!is.matrix(x)) return(mvtnorm::dmvnorm(x))
 #'   apply(x, 1, function(x) mvtnorm::dmvnorm(x))
 #' }
-#' gof_power(pnull, rnull, ralt, c(0, 1), dnull=dnull, B=5, maxProcessor = 1)
+#' \donttest{gof_power(pnull, rnull, ralt, c(0, 1), dnull=dnull, B=10, maxProcessor = 1)}
 #' # Power of tests when null hypothesis specifies a bivariate normal distribution, 
 #' # with mean parameter estimated, wheras data comes from a t distribution
 #' rnull=function(p) mvtnorm::rmvnorm(100, p)
@@ -53,7 +54,7 @@
 #'   apply(x, 1, function(x) mvtnorm::dmvnorm(x, mean=p))
 #' }
 #' phat=function(x) apply(x, 2, mean)
-#' gof_power(pnull, rnull, ralt, c(50, 5), dnull=dnull, phat=phat, B=5, maxProcessor = 1)
+#' \donttest{gof_power(pnull, rnull, ralt, c(50, 5), dnull=dnull, phat=phat, B=10, maxProcessor = 1)}
 #' # Example of a discrete model, with parameter estimation
 #' # Under null hypothesis: X~Bin(10, p), Y|X=x~Bin(5, 0.5+x/100)
 #' # Under alternative hypothesis: X~Bin(10, p), Y|X=x~Bin(5, K+x/100)
@@ -76,7 +77,7 @@
 #'   tx=tapply(x[,3], x[,1], sum)
 #'   mean(rep(as.numeric(names(tx)), times=tx))/10
 #' }
-#' gof_power(pnull, rnull, ralt, c(0.5, 0.6), phat=phat, B=5, maxProcessor = 1)
+#' \donttest{gof_power(pnull, rnull, ralt, c(0.5, 0.6), phat=phat, B=10, maxProcessor = 1)}
 #' @export 
 gof_power=function(pnull, rnull, ralt, param_alt, 
         phat=function(x) -99, dnull=function(x) -99, TS, TSextra, 

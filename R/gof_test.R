@@ -21,7 +21,8 @@
 #' @param  ReturnTSextra =FALSE, should setup info be returned?
 #' @return A list with vectors of test statistics and p.values
 #' @examples
-#' # All examples are run with B=20 and maxProcessor=1 to pass CRAN checks.
+#' # All examples are run with B=10 and maxProcessor=1 to pass CRAN checks.
+#' # This is obviously MUCH TO SMALL for any real usage.
 #' # Tests to see whether data comes from a bivariate standard normal distribution, 
 #' # without parameter estimation.
 #' rnull=function() mvtnorm::rmvnorm(100, c(0, 0))
@@ -30,13 +31,13 @@
 #'   if(!is.matrix(x)) return(mvtnorm::pmvnorm(rep(-Inf, 2), x))
 #'   apply(x, 1, function(x) mvtnorm::pmvnorm(rep(-Inf, 2), x))
 #' }
-#' gof_test(x, pnull, rnull, B=20, maxProcessor = 1)
+#' gof_test(x, pnull, rnull, B=10, maxProcessor = 1)
 #' # Same as above, but now with density included
 #' dnull=function(x) {
 #'   if(!is.matrix(x)) return(mvtnorm::dmvnorm(x))
 #'   apply(x, 1, function(x) mvtnorm::dmvnorm(x))
 #' }
-#' gof_test(x, pnull, rnull, dnull=dnull, B=20, maxProcessor = 1)
+#' \donttest{gof_test(x, pnull, rnull, dnull=dnull, B=20, maxProcessor = 1)}
 #' # Tests to see whether data comes from a standard normal distribution, 
 #' # with mean parameter estimated.
 #' rnull=function(p) mvtnorm::rmvnorm(100, p)
@@ -71,7 +72,7 @@
 #'   c(p1, p2)
 #' }
 #' x=rnull(c(0.5, 0.5))
-#' gof_test(x, pnull, rnull, phat=phat,B=20, maxProcessor = 1)
+#' gof_test(x, pnull, rnull, phat=phat,B=10, maxProcessor = 1)
 #' @export
 gof_test <- function(x, pnull, rnull, phat=function(x) -99, 
                     dnull=function(x) -99,
