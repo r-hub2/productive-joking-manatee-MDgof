@@ -17,7 +17,7 @@ gof_test(
   Ranges = matrix(c(-Inf, Inf, -Inf, Inf), 2, 2),
   minexpcount = 5,
   maxProcessor,
-  doMethods = "all",
+  doMethods,
   B = 5000,
   ReturnTSextra = FALSE
 )
@@ -47,7 +47,8 @@ gof_test(
 
 \item{maxProcessor}{number of processors to use in parallel processing.}
 
-\item{doMethods}{="all", a vector of codes for the methods to include or all of them.}
+\item{doMethods}{a vector of codes for the methods to include. If ="all", it does all the included tests.
+#missing it runs a default selection. I}
 
 \item{B}{=5000  number of simulation runs. If B=0 the routine returns the test statistics.}
 

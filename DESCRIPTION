@@ -20,7 +20,7 @@ Description: The routine gof_test() in this package runs the
 License: GPL (>=2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 LinkingTo: Rcpp
 Imports: Rcpp, parallel, stats, microbenchmark, spatstat.geom,
         spatstat.explore, FNN, copula, mvtnorm, ggplot2,
@@ -30,7 +30,7 @@ VignetteBuilder: knitr
 Depends: R (>= 3.5)
 LazyData: true
 NeedsCompilation: yes
-Packaged: 2026-01-21 14:04:47 UTC; Wolfgang
+Packaged: 2026-02-03 14:09:35 UTC; Wolfgang
 Author: Wolfgang Rolke [aut, cre] (ORCID:
     <https://orcid.org/0000-0002-3514-726X>)
 Maintainer: Wolfgang Rolke <wolfgang.rolke@upr.edu>

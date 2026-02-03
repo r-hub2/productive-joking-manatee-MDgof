@@ -3,6 +3,7 @@ knitr::opts_chunk$set(error=TRUE,
   collapse = TRUE,
   comment = "#>"
 )
+options(tinytex.clean = FALSE)
 
 ## ----setup, include=FALSE-----------------------------------------------------
 library(MDgof)

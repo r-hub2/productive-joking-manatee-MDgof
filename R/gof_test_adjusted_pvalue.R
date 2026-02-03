@@ -107,31 +107,36 @@ gof_test_adjusted_pvalue=function(x, pnull, rnull,
                         minexpcount=5, 
                         Ranges =matrix(c(-Inf, Inf, -Inf, Inf),2,2),
                         SuppressMessages=FALSE, 
-                        maxProcessor, doMethods="all") {
+                        maxProcessor, doMethods) {
   Continuous=TRUE
   if(ncol(x)==3 && all(abs(round(x[,3])-x[,3])<0.001)) Continuous=FALSE
   if(length(B)==1) B=c(B, B)
-  TSextra=makeTSextra(x, Continuous, pnull, rnull, phat, dnull, Ranges)   
+  TSextra=MDgof::makeTSextra(x, Continuous, pnull, rnull, phat, dnull, Ranges)   
   if(Continuous) {
-     allMethods=c("qKS", "qK", "qCvM", "qAD", "BB", "BR",  "KSD")
-     if(ncol(x)==2)  allMethods=c(allMethods, "MMD", "FF", "RK", "ES", "EP")
-     if(TSextra$NoDensity) 
-       IndexNotIncluded=seq_along(allMethods)[allMethods=="BB" | allMethods=="KSD" ]
-  }   
-  if(!Continuous) allMethods=c("KS", "K", "CvM", "AD", "TV", "KL", "H", "P")
-  if(doMethods[1]=="all") {
-     doMethods=allMethods
-     if(TSextra$NoDensity) doMethods=doMethods[-IndexNotIncluded]
-  }   
+    allMethods=c("qKS", "qK", "qCvM", "qAD", "BR")
+    defaultMethods=c("qK", "qCvM", "qAD")
+    if(ncol(x)==2) {
+      allMethods=c(allMethods, "MMD", "FF", "RK", "ES", "EP")
+      defaultMethods=c(defaultMethods, "FF", "RK", "EP")
+      if(!TSextra$NoDensity) {
+        allMethods=c(allMethods, "BB", "KSD")
+        defaultMethods=c(defaultMethods, "BB")
+      }    
+    }
+  } 
   else {
-    if(TSextra$NoDensity & "BB"%in%doMethods) {
-       message("Method BB can not be run without dnull (density function)")
-      doMethods=doMethods[doMethods!="BB"]
-    }
-    if(TSextra$NoDensity & "KSD"%in%doMethods) {
-      message("Method KSD can not be run without dnull (density function)")
-      doMethods=doMethods[doMethods!="KSD"]
-    }
+    allMethods=c("KS", "K", "CvM", "AD", "TV", "KL", "H", "P")
+    defaultMethods=c("K", "AD", "KL", "P")
+  }      
+  if(missing(doMethods)) doMethods=defaultMethods
+  if(doMethods[1]=="all") doMethods=allMethods
+  if(TSextra$NoDensity & "BB"%in%doMethods) {
+    message("Method BB can not be run without dnull (density function)")
+    doMethods=doMethods[doMethods!="BB"]
+  }
+  if(TSextra$NoDensity & "KSD"%in%doMethods) {
+    message("Method KSD can not be run without dnull (density function)")
+    doMethods=doMethods[doMethods!="KSD"]
   }
   
   if(Continuous) {
@@ -171,7 +176,6 @@ gof_test_adjusted_pvalue=function(x, pnull, rnull,
   for(j in 1:num_tests) pvalsdta[j]=pvalsdta[j]+sum(TS_data[j]<A[,j])/nrow(A) 
   pvalsdta=c(pvalsdta, outchi)
   names(pvalsdta)=allMethods
-  if(TSextra$NoDensity) pvalsdta=pvalsdta[-IndexNotIncluded]
   if(maxProcessor==1) {
     tmp=simpvals(x, TS, typeTS, TSextra, A,  
                  Ranges, nbins, minexpcount, B=B[2])
@@ -191,7 +195,6 @@ gof_test_adjusted_pvalue=function(x, pnull, rnull,
       B[1]=nrow(pvalsTS)
       parallel::stopCluster(cl)
   }
-  if(TSextra$NoDensity) pvalsTS=pvalsTS[ ,-IndexNotIncluded]
   pvals=cbind(pvalsTS, pvalsChi) 
   pvals=pvals[ ,doMethods,drop=FALSE]
   pvalsdta=pvalsdta[doMethods]

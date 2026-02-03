@@ -16,7 +16,7 @@ gof_test_adjusted_pvalue(
   Ranges = matrix(c(-Inf, Inf, -Inf, Inf), 2, 2),
   SuppressMessages = FALSE,
   maxProcessor,
-  doMethods = "all"
+  doMethods
 )
 }
 \arguments{

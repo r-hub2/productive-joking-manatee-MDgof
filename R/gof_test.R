@@ -16,7 +16,8 @@
 #' @param  Ranges =matrix(c(-Inf, Inf, -Inf, Inf),2,2), a 2x2 matrix with lower and upper bounds, if any, for chi-square tests
 #' @param  minexpcount =5 minimal expected bin count required
 #' @param  maxProcessor number of processors to use in parallel processing. 
-#' @param  doMethods ="all", a vector of codes for the methods to include or all of them. 
+#' @param  doMethods a vector of codes for the methods to include. If ="all", it does all the included tests. 
+#' #missing it runs a default selection. I 
 #' @param  B =5000  number of simulation runs. If B=0 the routine returns the test statistics.
 #' @param  ReturnTSextra =FALSE, should setup info be returned?
 #' @return A list with vectors of test statistics and p.values
@@ -78,20 +79,38 @@ gof_test <- function(x, pnull, rnull, phat=function(x) -99,
                     dnull=function(x) -99,
                     TS, TSextra, rate=0,  nbins=c(5, 5),  
                     Ranges =matrix(c(-Inf, Inf, -Inf, Inf),2,2), minexpcount=5.0,
-                    maxProcessor, doMethods="all", B=5000,
+                    maxProcessor, doMethods, B=5000,
                     ReturnTSextra=FALSE) {
   check.functions(pnull, rnull, phat, x=x)
   NewTS=ifelse(missing(TS), FALSE, TRUE)
   Continuous=TRUE
   if(ncol(x)==3 && all(abs(round(x[,3])-x[,3])<0.001)) Continuous=FALSE
-  if(doMethods[1]=="all") {
-    if(Continuous) {
-       doMethods=c("qKS", "qK", "qCvM", "qAD", "BB", "BR",  "KSD")
-       if(ncol(x)==2)
-          doMethods=c(doMethods, "MMD", "FF", "RK", "ES", "EP")
-    }   
-    if(!Continuous)
-        doMethods=c("KS", "K", "CvM", "AD", "TV", "KL", "H", "P")
+  TSextra=MDgof::makeTSextra(x, Continuous, pnull, rnull, phat, dnull, Ranges)     
+  if(Continuous) {
+     allMethods=c("qKS", "qK", "qCvM", "qAD", "BR")
+     defaultMethods=c("qK", "qCvM", "qAD")
+     if(ncol(x)==2) {
+        allMethods=c(allMethods, "MMD", "FF", "RK", "ES", "EP")
+        defaultMethods=c(defaultMethods, "FF", "RK", "EP")
+        if(!TSextra$NoDensity) {
+            allMethods=c(allMethods, "BB", "KSD")
+            defaultMethods=c(defaultMethods, "BB")
+        }    
+      }
+  } 
+  else {
+        allMethods=c("KS", "K", "CvM", "AD", "TV", "KL", "H", "P")
+        defaultMethods=c("K", "AD", "KL", "P")
+  }      
+  if(missing(doMethods)) doMethods=defaultMethods
+  if(doMethods[1]=="all") doMethods=allMethods
+  if(TSextra$NoDensity & "BB"%in%doMethods) {
+      message("Method BB can not be run without dnull (density function)")
+      doMethods=doMethods[doMethods!="BB"]
+  }
+  if(TSextra$NoDensity & "KSD"%in%doMethods) {
+      message("Method KSD can not be run without dnull (density function)")
+      doMethods=doMethods[doMethods!="KSD"]
   }
   TSextra=makeTSextra(x, Continuous, pnull, rnull, phat, dnull, Ranges, TSextra) 
   if(ReturnTSextra) return(TSextra)

@@ -8,15 +8,15 @@
 #' @return a list of functions
 #' @export
 case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
-  cases=c("uniform.diagonal.n", "uniform.diagonal.b", "normal.sig",
-          "t.sig", "uniform.Frank", "uniform.Clayton",
+  cases=c("uniform.uniform-diagonal-n", "uniform.uniform-diagonal-b", "normal-ind.normal-cor",
+          "t-ind.t-cor", "uniform.Frank", "uniform.Clayton",
           "uniform.Gumbel", "uniform.Galambos", "uniform.HuslerReiss",
           "uniform.Joe", "mix.Clayton.Gumbel", "mix.uniform.Frank",
           "mix.Clayton.Frank", "mix.Frank.Gumbel", "mix.Frank.Joe",
-          "normal.shift-one.marginal", "normal.shift-two.marginal",
-          "normal.stretch-one.marginal", "normal.stretch-two.marginal",
+          "normal.normal-shift-one.marginal", "normal.normal-shift-both.marginal",
+          "normal.normal-stretch-one.marginal", "normal.normal-stretch-both.marginal",
           "normal.stretch-shift-one.marginal", "normal.stretch-shift-two.marginal",
-          "uniform.rotate.marginal", "uniform.beta-one.marginal",
+          "uniform.rotated-uniform.marginal", "uniform.beta-one.marginal",
           "uniform.beta-two.marginal", "uni-exp-1.uni-exp-l.marginal",
           "exp-exp-1.exp-exp-l.marginal","beta-nor-1.beta-nor-mean.marginal",
           "beta-nor-1.beta-nor-sd.marginal",
@@ -74,7 +74,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
     return(rbind(x[1:(m-n), ], cbind(y1, y2))) 
   }
 # 1:  
-  if(which=="uniform.diagonal.n") {
+  if(which=="uniform.uniform-diagonal-n") {
     return(list(
       pnull=pnull, dnull=dnull, rnull=rnull,    
       ralt = function(alpha) {
@@ -87,7 +87,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
     ))
   }  
 # 2:   
-  if(which=="uniform.diagonal.b") {
+  if(which=="uniform.uniform-diagonal-b") {
     return(list(
       pnull = pnull, rnull=rnull, dnull=dnull,
       ralt = function(alpha) {
@@ -100,7 +100,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
     ))
   }
 # 3: 
-  if(which=="normal.sig") {
+  if(which=="normal-ind.normal-cor") {
     return(list(
       pnull=pnull, dnull=dnull, 
       rnull = rnull, 
@@ -113,7 +113,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
     ))
   }
 # 4:  
-  if(which=="t.sig") {
+  if(which=="t-ind.t-cor") {
     return(list(
       pnull=function(x) {
         if(!is.matrix(x)) x=rbind(x)
@@ -217,7 +217,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
   }
 # Studies with unequal marginals
 # 16:  
-  if(which=="normal.shift-one.marginal") {
+  if(which=="normal.normal-shift-one.marginal") {
     return(list(
       pnull=pnull, dnull=dnull, rnull = rnull, 
       ralt=function(s) {
@@ -229,7 +229,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
     ))
   }  
 # 17:  
-  if(which=="normal.shift-two.marginal") {
+  if(which=="normal.normal-shift-both.marginal") {
     return(list(
       pnull=pnull, dnull=dnull, rnull = rnull, 
       ralt=function(s) {
@@ -241,7 +241,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
     ))
   }  
 # 18:  
-  if(which=="normal.stretch-one.marginal") {
+  if(which=="normal.normal-stretch-one.marginal") {
     return(list(
       pnull=pnull, dnull=dnull, rnull = rnull, 
       ralt=function(s) {
@@ -253,7 +253,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
     ))
   }  
 # 19:  
-  if(which=="normal.stretch-two.marginal") {
+  if(which=="normal.normal-stretch-both.marginal") {
     return(list(
       pnull=pnull, dnull=dnull, rnull = rnull, 
       ralt=function(s) {
@@ -291,7 +291,7 @@ case.studies.cont=function(which, nsample=250, ReturnCaseNames = FALSE) {
     ))
   } 
 # 22:  
-  if(which=="uniform.rotate.marginal") {
+  if(which=="uniform.rotated-uniform.marginal") {
       return(list(
       pnull=pnull,  rnull=rnull, dnull=dnull,
       ralt = function(alpha) {

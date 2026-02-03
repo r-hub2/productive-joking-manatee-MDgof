@@ -54,7 +54,7 @@ Another classic test using
 $$\psi(F,\hat{F})=\int \left(F(\mathbf{x})-\hat{F}(\mathbf{x})\right)^2 d\mathbf{x}$$
 
 $$TS=\sum_{i=1}^n \left(F(\mathbf{x}_i)-\hat{F}(\mathbf{x}_i)\right)^2$$
-This test was first discussed in is discussed in [@Anderson1962].
+This test was first discussed in [@Anderson1962].
 
 **Quick Anderson-Darling test (qAD)**
 

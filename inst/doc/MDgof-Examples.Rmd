@@ -12,6 +12,7 @@ knitr::opts_chunk$set(error=TRUE,
   collapse = TRUE,
   comment = "#>"
 )
+options(tinytex.clean = FALSE)
 ```
 
 ```{r setup, include=FALSE}
