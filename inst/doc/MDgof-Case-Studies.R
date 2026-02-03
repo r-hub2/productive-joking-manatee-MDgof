@@ -10,20 +10,20 @@ knitr::opts_chunk$set(echo = TRUE, error=TRUE,
 library(MDgof)
 
 ## ----message=TRUE-------------------------------------------------------------
-MDgof::draw_case("uniform.diagonal.n", 
+MDgof::draw_case("uniform.uniform-diagonal-n", 
                   Continuous=TRUE,  
                   WithEstimation=FALSE, 
                   Dim=2)
 
 ## ----message=TRUE-------------------------------------------------------------
-MDgof::draw_case("uniform.diagonal.n", 
+MDgof::draw_case("uniform.uniform-diagonal-n", 
                   Continuous=TRUE,  
                   WithEstimation=FALSE, 
                   Dim=2, AltOnly=TRUE,
                  palt=0.6)
 
 ## ----message=TRUE-------------------------------------------------------------
-MDgof::draw_case(3,Dim=5, AltOnly=TRUE, Dms=c(2,4))
+MDgof::draw_case(3, Dim=5, AltOnly=TRUE, Dms=c(2,4))
 
 ## -----------------------------------------------------------------------------
 tmp=MDgof::case.studies(1, F, F)

@@ -25,7 +25,7 @@ This vignette lists the case studies included in the package. They all create da
 To visualize a case study *MDgof* includes the routine *draw_case*. Let's say we want to have a look at the first case study discussed below, called *uniform.diagonal.n*, for continuous data without parameter estimation in two dimensions:
 
 ```{r message=TRUE}
-MDgof::draw_case("uniform.diagonal.n", 
+MDgof::draw_case("uniform.uniform-diagonal-n", 
                   Continuous=TRUE,  
                   WithEstimation=FALSE, 
                   Dim=2)
@@ -34,7 +34,7 @@ MDgof::draw_case("uniform.diagonal.n",
 Under the null hypothesis this is just independent uniform data. If we wish to see better what the data under the alternative is, we can draw that case alone and also use a larger value for the parameter:
 
 ```{r message=TRUE}
-MDgof::draw_case("uniform.diagonal.n", 
+MDgof::draw_case("uniform.uniform-diagonal-n", 
                   Continuous=TRUE,  
                   WithEstimation=FALSE, 
                   Dim=2, AltOnly=TRUE,
@@ -44,7 +44,7 @@ MDgof::draw_case("uniform.diagonal.n",
 In the case studies for 5 dimensional data there are ${{5}\choose{2}}=10$ pairwise plots. To select any two of them use the Dms argument. As an example, let's say we wish to visualize the second and fourth dimensions of the alternative of the third case study: 
 
 ```{r message=TRUE}
-MDgof::draw_case(3,Dim=5, AltOnly=TRUE, Dms=c(2,4))
+MDgof::draw_case(3, Dim=5, AltOnly=TRUE, Dms=c(2,4))
 ```
 
 ## Continuous Data, dim=2, equal marginals, no parameter estimation
